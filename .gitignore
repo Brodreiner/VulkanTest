@@ -1,0 +1,8 @@
+*.suo
+*.ilk
+Debug
+Release
+*.sdf
+*.user
+*.vspx
+*.opendb
