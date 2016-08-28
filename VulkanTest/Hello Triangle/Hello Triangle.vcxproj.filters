@@ -32,6 +32,9 @@
     <ClInclude Include="cube.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="AmrDevice.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="shaders\shader.frag" />

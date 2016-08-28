@@ -8,28 +8,28 @@
 
 #include <iostream>
 
-int main() {
-	glfwInit();
+#include <vector>
+#include <map>
+#include <set>
+#include <chrono>
+#include <array>
+#include <functional>
 
-	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-	GLFWwindow* window = glfwCreateWindow(800, 600, "Vulkan window", nullptr, nullptr);
+#include "AmrWindow.hpp"
+#include "AmrValidationLayer.hpp"
+#include "AmrDebugCallback.hpp"
+#include "AmrSurface.hpp"
+#include "AmrQueueFamily.hpp"
+#include "AmrQueue.hpp"
+#include "AmrPhysicalDevice.hpp"
+#include "AmrDevice.hpp"
+#include "AmrSwapChain.hpp"
+#include "AmrInstance.hpp"
+#include "AmrEngine.hpp"
 
-	uint32_t extensionCount = 0;
-	vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
 
-	std::cout << extensionCount << " extensions supported" << std::endl;
-
-	glm::mat4 matrix;
-	glm::vec4 vec;
-	auto test = matrix * vec;
-
-	while (!glfwWindowShouldClose(window)) {
-		glfwPollEvents();
-	}
-
-	glfwDestroyWindow(window);
-
-	glfwTerminate();
-
+int main()
+{
+	AmrEngine amrEngine(800, 600, "Amr Engine");
 	return 0;
 }
