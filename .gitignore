@@ -6,3 +6,4 @@ Release
 *.user
 *.vspx
 *.opendb
+/VulkanTest/VulkanTest/doxygen/html

@@ -175,13 +175,16 @@
   <ItemGroup>
     <ClInclude Include="AmrDebugCallback.hpp" />
     <ClInclude Include="AmrEngine.hpp" />
+    <ClInclude Include="AmrImageView.hpp" />
     <ClInclude Include="AmrInstance.hpp" />
     <ClInclude Include="AmrDevice.hpp" />
     <ClInclude Include="AmrPhysicalDevice.hpp" />
     <ClInclude Include="AmrQueue.hpp" />
     <ClInclude Include="AmrQueueFamily.hpp" />
+    <ClInclude Include="AmrRenderPass.hpp" />
     <ClInclude Include="AmrSurface.hpp" />
     <ClInclude Include="AmrSwapChain.hpp" />
+    <ClInclude Include="AmrSwapChainImageViews.hpp" />
     <ClInclude Include="AmrValidationLayer.hpp" />
     <ClInclude Include="AmrWindow.hpp" />
   </ItemGroup>

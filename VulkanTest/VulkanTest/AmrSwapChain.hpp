@@ -7,6 +7,7 @@ class AmrSwapChain
 	std::vector<VkImage> m_swapChainImages;
 	VkFormat m_swapChainImageFormat;
 	VkExtent2D m_swapChainExtent;
+	std::vector<AmrImageView> m_imageViewVector;
 
 	struct SwapChainSupportDetails
 	{
@@ -145,17 +146,34 @@ class AmrSwapChain
 		m_swapChainExtent = extent;
 	}
 
+	void createImageViews()
+	{
+		m_imageViewVector.clear();
+
+		for (auto& swapChainImage : m_swapChainImages)
+		{
+			m_imageViewVector.emplace_back(m_device, swapChainImage, m_swapChainImageFormat, VK_IMAGE_ASPECT_COLOR_BIT);
+		}
+	}
+
+
 public:
 
 	AmrSwapChain(VkPhysicalDevice physicalDevice, VkDevice device, VkSurfaceKHR surface, uint32_t graphicsQueueFamilyIndex, uint32_t presentQueueFamilyIndex, VkExtent2D desiredExtent)
 		:m_device(device)
 	{
 		createSwapChain(physicalDevice, surface, graphicsQueueFamilyIndex, presentQueueFamilyIndex, desiredExtent);
+		createImageViews();
 	}
 
 	~AmrSwapChain()
 	{
 		vkDestroySwapchainKHR(m_device, m_swapChain, nullptr);
+	}
+
+	VkFormat getImageFormat() const
+	{
+		return m_swapChainImageFormat;
 	}
 
 	operator VkSwapchainKHR() const

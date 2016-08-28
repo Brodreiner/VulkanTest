@@ -53,5 +53,14 @@
     <ClInclude Include="AmrSwapChain.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="AmrImageView.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="AmrSwapChainImageViews.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="AmrRenderPass.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
