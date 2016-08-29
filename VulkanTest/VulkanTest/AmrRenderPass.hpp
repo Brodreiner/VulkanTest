@@ -78,4 +78,9 @@ public:
 	{
 		vkDestroyRenderPass(m_device, m_renderPass, nullptr);
 	}
+
+	operator VkRenderPass() const
+	{
+		return m_renderPass;
+	}
 };

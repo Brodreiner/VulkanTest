@@ -38,4 +38,9 @@ public:
 			vkDestroyImageView(m_device, m_imageView, nullptr);
 	}
 
+	operator VkImageView() const
+	{
+		return m_imageView;
+	}
+
 };

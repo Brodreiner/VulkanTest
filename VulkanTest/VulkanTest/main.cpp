@@ -5,6 +5,13 @@
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/vec4.hpp>
 #include <glm/mat4x4.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
+
+
 
 #include <iostream>
 
@@ -14,7 +21,13 @@
 #include <chrono>
 #include <array>
 #include <functional>
+#include <fstream>
 
+#include "AmrFormat.hpp"
+
+#include "AmrVertex.hpp"
+#include "AmrFramebuffer.hpp"
+#include "AmrFramebufferStack.hpp"
 #include "AmrWindow.hpp"
 #include "AmrValidationLayer.hpp"
 #include "AmrDebugCallback.hpp"
@@ -28,6 +41,12 @@
 #include "AmrInstance.hpp"
 #include "AmrSwapChainImageViews.hpp"
 #include "AmrRenderPass.hpp"
+#include "AmrDescriptorSetLayout.hpp"
+#include "AmrShader.hpp"
+#include "AmrPipelineLayout.hpp"
+#include "AmrPipeline.hpp"
+#include "AmrCommandPool.hpp"
+#include "AmrImage.hpp"
 
 
 

@@ -96,7 +96,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.0.21.1\Include;C:\Libraries\glfw-3.2.1.bin.WIN64\include;C:\Libraries\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.0.21.1\Include;C:\Libraries\glfw-3.2.1.bin.WIN64\include;C:\Libraries;C:\Libraries\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
@@ -113,7 +113,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.0.21.1\Include;C:\Libraries\glfw-3.2.1.bin.WIN64\include;C:\Libraries\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.0.21.1\Include;C:\Libraries\glfw-3.2.1.bin.WIN64\include;C:\Libraries;C:\Libraries\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnablePREfast>true</EnablePREfast>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
@@ -136,7 +136,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.0.21.1\Include;C:\Libraries\glfw-3.2.1.bin.WIN64\include;C:\Libraries\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.0.21.1\Include;C:\Libraries\glfw-3.2.1.bin.WIN64\include;C:\Libraries;C:\Libraries\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
@@ -157,7 +157,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.0.21.1\Include;C:\Libraries\glfw-3.2.1.bin.WIN64\include;C:\Libraries\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.0.21.1\Include;C:\Libraries\glfw-3.2.1.bin.WIN64\include;C:\Libraries;C:\Libraries\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnablePREfast>false</EnablePREfast>
     </ClCompile>
     <Link>
@@ -173,19 +173,29 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AmrCommandPool.hpp" />
     <ClInclude Include="AmrDebugCallback.hpp" />
+    <ClInclude Include="AmrDescriptorSetLayout.hpp" />
     <ClInclude Include="AmrEngine.hpp" />
+    <ClInclude Include="AmrFormat.hpp" />
+    <ClInclude Include="AmrFramebuffer.hpp" />
+    <ClInclude Include="AmrFramebufferStack.hpp" />
+    <ClInclude Include="AmrImage.hpp" />
     <ClInclude Include="AmrImageView.hpp" />
     <ClInclude Include="AmrInstance.hpp" />
     <ClInclude Include="AmrDevice.hpp" />
     <ClInclude Include="AmrPhysicalDevice.hpp" />
+    <ClInclude Include="AmrPipeline.hpp" />
+    <ClInclude Include="AmrPipelineLayout.hpp" />
     <ClInclude Include="AmrQueue.hpp" />
     <ClInclude Include="AmrQueueFamily.hpp" />
     <ClInclude Include="AmrRenderPass.hpp" />
+    <ClInclude Include="AmrShader.hpp" />
     <ClInclude Include="AmrSurface.hpp" />
     <ClInclude Include="AmrSwapChain.hpp" />
     <ClInclude Include="AmrSwapChainImageViews.hpp" />
     <ClInclude Include="AmrValidationLayer.hpp" />
+    <ClInclude Include="AmrVertex.hpp" />
     <ClInclude Include="AmrWindow.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
