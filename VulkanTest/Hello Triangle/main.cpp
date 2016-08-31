@@ -1497,7 +1497,7 @@ private:
 };
 
 int main() {
-	addCubes(100);
+	addCubes(1);
 
 	HelloTriangleApplication app;
 

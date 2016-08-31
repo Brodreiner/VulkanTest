@@ -30,4 +30,9 @@ public:
 		vkDestroyDescriptorPool(m_device, m_descriptorPool, nullptr);
 	}
 
+	operator VkDescriptorPool() const
+	{
+		return m_descriptorPool;
+	}
+
 };

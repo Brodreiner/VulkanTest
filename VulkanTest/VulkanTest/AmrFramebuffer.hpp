@@ -35,4 +35,9 @@ public:
 			vkDestroyFramebuffer(m_device, m_framebuffer, nullptr);
 	}
 
+	operator VkFramebuffer() const
+	{
+		return m_framebuffer;
+	}
+
 };

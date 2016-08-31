@@ -28,6 +28,32 @@
 
 #include "AmrVertex.hpp"
 
+
+struct UniformBufferObject {
+	glm::mat4 model;
+	glm::mat4 view;
+	glm::mat4 proj;
+};
+
+std::vector<AmrVertex> vertices = {
+	{ { -0.5f, -0.5f, 0.0f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 0.0f } },
+	{ { 0.5f, -0.5f, 0.0f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 0.0f } },
+	{ { 0.5f, 0.5f, 0.0f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 1.0f } },
+	{ { -0.5f, 0.5f, 0.0f },{ 1.0f, 1.0f, 1.0f },{ 0.0f, 1.0f } },
+
+	{ { -0.5f, -0.5f, -0.5f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 0.0f } },
+	{ { 0.5f, -0.5f, -0.5f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 0.0f } },
+	{ { 0.5f, 0.5f, -0.5f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 1.0f } },
+	{ { -0.5f, 0.5f, -0.5f },{ 1.0f, 1.0f, 1.0f },{ 0.0f, 1.0f } }
+};
+
+std::vector<uint32_t> indices = {
+	0, 1, 2, 2, 3, 0,
+	4, 5, 6, 6, 7, 4
+};
+
+
+
 #include "AmrBuffer.hpp"
 
 #include "AmrFramebuffer.hpp"
@@ -62,6 +88,11 @@
 #include "AmrIndexBuffer.hpp"
 #include "AmrUniformBuffer.hpp"
 #include "AmrDescriptorPool.hpp"
+#include "AmrDescriptorSet.hpp"
+
+#include "AmrSwapChainCommandBuffers.hpp"
+
+#include "AmrSemaphore.hpp"
 
 #include "AmrEngine.hpp"
 

@@ -31,4 +31,9 @@ public:
 		vkDestroySampler(m_device, m_sampler, nullptr);
 	}
 
+	operator VkSampler() const
+	{
+		return m_sampler;
+	}
+
 };

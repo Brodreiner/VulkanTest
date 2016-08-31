@@ -14,7 +14,7 @@ class AmrQueueFamily
 
 	static QueueFamilyIndices findBestQueueFamilieCombination(VkPhysicalDevice device, VkSurfaceKHR surface)
 	{
-		QueueFamilyIndices indices;
+		QueueFamilyIndices queueFamilyIndices;
 		uint32_t queueFamilyCount = 0;
 		vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
 		std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
@@ -22,19 +22,19 @@ class AmrQueueFamily
 		int i = 0;
 		for (const auto& queueFamily : queueFamilies) {
 			if (queueFamily.queueCount > 0 && queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
-				indices.graphicsFamily = i;
+				queueFamilyIndices.graphicsFamily = i;
 			}
 			VkBool32 presentSupport = false;
 			vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentSupport);
 			if (queueFamily.queueCount > 0 && presentSupport) {
-				indices.presentFamily = i;
+				queueFamilyIndices.presentFamily = i;
 			}
-			if (indices.isComplete()) {
+			if (queueFamilyIndices.isComplete()) {
 				break;
 			}
 			i++;
 		}
-		return indices;
+		return queueFamilyIndices;
 	}
 
 	QueueFamilyIndices m_indices;
@@ -43,8 +43,7 @@ class AmrQueueFamily
 public:
 	static bool hasSufficientQueueFamilySupport(VkPhysicalDevice device, VkSurfaceKHR surface)
 	{
-		QueueFamilyIndices indices = findBestQueueFamilieCombination(device, surface);
-		return indices.isComplete();
+		return findBestQueueFamilieCombination(device, surface).isComplete();
 	}
 
 	AmrQueueFamily(VkPhysicalDevice device, VkSurfaceKHR surface)

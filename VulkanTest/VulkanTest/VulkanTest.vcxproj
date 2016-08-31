@@ -179,6 +179,7 @@
     <ClInclude Include="AmrDebugCallback.hpp" />
     <ClInclude Include="AmrDepthImage.hpp" />
     <ClInclude Include="AmrDescriptorPool.hpp" />
+    <ClInclude Include="AmrDescriptorSet.hpp" />
     <ClInclude Include="AmrDescriptorSetLayout.hpp" />
     <ClInclude Include="AmrEngine.hpp" />
     <ClInclude Include="AmrFormat.hpp" />
@@ -196,9 +197,11 @@
     <ClInclude Include="AmrQueue.hpp" />
     <ClInclude Include="AmrQueueFamily.hpp" />
     <ClInclude Include="AmrRenderPass.hpp" />
+    <ClInclude Include="AmrSemaphore.hpp" />
     <ClInclude Include="AmrShader.hpp" />
     <ClInclude Include="AmrSurface.hpp" />
     <ClInclude Include="AmrSwapChain.hpp" />
+    <ClInclude Include="AmrSwapChainCommandBuffers.hpp" />
     <ClInclude Include="AmrSwapChainImageViews.hpp" />
     <ClInclude Include="AmrTextureFile.hpp" />
     <ClInclude Include="AmrTextureImage.hpp" />

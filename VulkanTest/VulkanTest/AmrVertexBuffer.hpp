@@ -2,8 +2,8 @@
 
 class AmrVertexBuffer
 {
-	AmrBuffer vertexBuffer;
-	AmrDeviceMemory vertexMemory;
+	AmrBuffer m_buffer;
+	AmrDeviceMemory m_memory;
 public:
 	AmrVertexBuffer(VkPhysicalDevice physicalDevice, VkDevice device, VkQueue queue, const AmrCommandPool& amrCommandPool, void* data, VkDeviceSize size)
 	{
@@ -12,10 +12,15 @@ public:
 		stagingMemory.writeData(data, size);
 		vkBindBufferMemory(device, stagingBuffer, stagingMemory, 0);
 
-		vertexBuffer = AmrBuffer(device, size, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT);
-		vertexMemory = AmrDeviceMemory(physicalDevice, device, vertexBuffer.getMemoryRequirements(), VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
-		vkBindBufferMemory(device, vertexBuffer, vertexMemory, 0);
+		m_buffer = AmrBuffer(device, size, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT);
+		m_memory = AmrDeviceMemory(physicalDevice, device, m_buffer.getMemoryRequirements(), VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+		vkBindBufferMemory(device, m_buffer, m_memory, 0);
 
-		amrCommandPool.copyBuffer(queue, stagingBuffer, vertexBuffer, size);
+		amrCommandPool.copyBuffer(queue, stagingBuffer, m_buffer, size);
+	}
+
+	operator VkBuffer() const
+	{
+		return m_buffer;
 	}
 };

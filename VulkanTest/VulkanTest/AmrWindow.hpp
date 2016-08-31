@@ -32,6 +32,7 @@ public:
 		while (!glfwWindowShouldClose(m_window))
 		{
 			glfwPollEvents();
+			m_eventLoopCallback();
 		}
 	}
 	void setResizeCallback(std::function<void(int, int)> callback)
