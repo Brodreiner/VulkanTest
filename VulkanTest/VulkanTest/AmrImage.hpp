@@ -2,9 +2,9 @@
 
 class AmrImage
 {
-	VkImage m_image;
-	VkDeviceMemory m_deviceMemory;
-	VkDevice m_device;
+	VkImage m_image = VK_NULL_HANDLE;
+	VkDeviceMemory m_deviceMemory = VK_NULL_HANDLE;
+	VkDevice m_device = VK_NULL_HANDLE;
 
 	void createImage(const AmrPhysicalDevice& amrPhysicalDevice, VkExtent2D extent, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties)
 	{
@@ -44,6 +44,20 @@ class AmrImage
 
 public:
 
+	AmrImage()
+	{
+	}
+
+	AmrImage(const AmrImage&) = delete;
+	AmrImage& operator=(const AmrImage&) = delete;
+	AmrImage& operator=(AmrImage&& other)
+	{
+		std::swap(m_image, other.m_image);
+		std::swap(m_deviceMemory, other.m_deviceMemory);
+		std::swap(m_device, other.m_device);
+		return *this;
+	}
+
 	AmrImage(const AmrPhysicalDevice& amrPhysicalDevice, VkDevice device, VkExtent2D extent, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties)
 		: m_device(device)
 	{
@@ -52,8 +66,22 @@ public:
 
 	~AmrImage()
 	{
-		vkFreeMemory(m_device, m_deviceMemory, nullptr);
-		vkDestroyImage(m_device, m_image, nullptr);
+		if(m_deviceMemory != VK_NULL_HANDLE)
+			vkFreeMemory(m_device, m_deviceMemory, nullptr);
+		if (m_image != VK_NULL_HANDLE)
+			vkDestroyImage(m_device, m_image, nullptr);
+	}
+
+	void writeData(const void* pixels, size_t imageSize)
+	{
+		if (pixels == nullptr)
+			throw std::runtime_error("Texture cannot be copied, because source has no data!");
+		if (m_deviceMemory == VK_NULL_HANDLE)
+			throw std::runtime_error("Texture cannot be copied, because dest is not alloccated!");
+		void* data;
+		vkMapMemory(m_device, m_deviceMemory, 0, static_cast<VkDeviceSize>(imageSize), 0, &data);
+		memcpy(data, pixels, imageSize);
+		vkUnmapMemory(m_device, m_deviceMemory);
 	}
 
 	operator VkImage() const

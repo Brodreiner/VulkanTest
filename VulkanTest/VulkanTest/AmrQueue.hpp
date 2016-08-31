@@ -10,4 +10,9 @@ public:
 	{
 		vkGetDeviceQueue(m_device, queueFamily, index, &m_queue);
 	}
+
+	operator VkQueue() const
+	{
+		return m_queue;
+	}
 };

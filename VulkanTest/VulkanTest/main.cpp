@@ -23,11 +23,15 @@
 #include <functional>
 #include <fstream>
 
+#include "AmrDeviceMemory.hpp"
 #include "AmrFormat.hpp"
 
 #include "AmrVertex.hpp"
+
+#include "AmrBuffer.hpp"
 #include "AmrFramebuffer.hpp"
 #include "AmrFramebufferStack.hpp"
+#include "AmrCommandBuffer.hpp"
 #include "AmrWindow.hpp"
 #include "AmrValidationLayer.hpp"
 #include "AmrDebugCallback.hpp"
@@ -47,6 +51,11 @@
 #include "AmrPipeline.hpp"
 #include "AmrCommandPool.hpp"
 #include "AmrImage.hpp"
+#include "AmrTextureFile.hpp"
+#include "AmrTextureImage.hpp"
+#include "AmrTextureSampler.hpp"
+
+#include "AmrDepthImage.hpp"
 
 
 

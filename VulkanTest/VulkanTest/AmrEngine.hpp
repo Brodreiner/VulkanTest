@@ -17,10 +17,11 @@ class AmrEngine
 	AmrPipelineLayout m_amrPipelineLayout;
 	AmrPipeline m_amrPipeline;
 	AmrCommandPool m_amrCommandPool;
-	AmrFormat m_amrDepthFormat;
-	AmrImage m_amrDepthImage;
-	AmrImageView m_amrDepthImageView;
+	AmrDepthImage m_amrDepthImage;
 	AmrFramebufferStack m_amrFramebufferStack;
+	AmrTextureImage m_amrTextureImage;
+	AmrImageView m_amrTextureImageView;
+	AmrTextureSampler m_amrTextureSampler;
 public:
 	AmrEngine(uint32_t width, uint32_t height, const std::string& title)
 		: m_amrWindow(width, height, title)
@@ -37,10 +38,11 @@ public:
 		, m_amrPipelineLayout(m_amrDevice, m_amrDescriptorSetLayout)
 		, m_amrPipeline(m_amrDevice, m_amrSwapChain.getExtent(), m_amrPipelineLayout, m_amrRenderPass)
 		, m_amrCommandPool(m_amrDevice, m_amrQueueFamily.getGraphicsQueueFamilyIndex())
-		, m_amrDepthFormat(m_amrPhysicalDevice, { VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT }, VK_IMAGE_TILING_OPTIMAL, VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT)
-		, m_amrDepthImage(m_amrPhysicalDevice, m_amrDevice, m_amrSwapChain.getExtent(), m_amrDepthFormat, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT)
-		, m_amrDepthImageView(m_amrDevice, m_amrDepthImage, m_amrDepthFormat, VK_IMAGE_ASPECT_DEPTH_BIT)
-		, m_amrFramebufferStack(m_amrDevice, m_amrSwapChain.getImageViews(), m_amrDepthImageView, m_amrRenderPass, m_amrSwapChain.getExtent())
+		, m_amrDepthImage(m_amrPhysicalDevice, m_amrGraphicsQueue, m_amrCommandPool, m_amrDevice, m_amrSwapChain.getExtent())
+		, m_amrFramebufferStack(m_amrDevice, m_amrSwapChain.getImageViews(), m_amrDepthImage.getImageView(), m_amrRenderPass, m_amrSwapChain.getExtent())
+		, m_amrTextureImage(m_amrPhysicalDevice, m_amrDevice, m_amrCommandPool, m_amrGraphicsQueue, "textures/texture.jpg")
+		, m_amrTextureImageView(m_amrDevice, m_amrTextureImage, VK_FORMAT_R8G8B8A8_UNORM, VK_IMAGE_ASPECT_COLOR_BIT)
+		, m_amrTextureSampler(m_amrDevice)
 
 	{
 		m_amrWindow.mainLoop();

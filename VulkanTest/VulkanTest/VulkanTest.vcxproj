@@ -173,8 +173,11 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AmrBuffer.hpp" />
+    <ClInclude Include="AmrCommandBuffer.hpp" />
     <ClInclude Include="AmrCommandPool.hpp" />
     <ClInclude Include="AmrDebugCallback.hpp" />
+    <ClInclude Include="AmrDepthImage.hpp" />
     <ClInclude Include="AmrDescriptorSetLayout.hpp" />
     <ClInclude Include="AmrEngine.hpp" />
     <ClInclude Include="AmrFormat.hpp" />
@@ -184,6 +187,7 @@
     <ClInclude Include="AmrImageView.hpp" />
     <ClInclude Include="AmrInstance.hpp" />
     <ClInclude Include="AmrDevice.hpp" />
+    <ClInclude Include="AmrDeviceMemory.hpp" />
     <ClInclude Include="AmrPhysicalDevice.hpp" />
     <ClInclude Include="AmrPipeline.hpp" />
     <ClInclude Include="AmrPipelineLayout.hpp" />
@@ -194,6 +198,9 @@
     <ClInclude Include="AmrSurface.hpp" />
     <ClInclude Include="AmrSwapChain.hpp" />
     <ClInclude Include="AmrSwapChainImageViews.hpp" />
+    <ClInclude Include="AmrTextureFile.hpp" />
+    <ClInclude Include="AmrTextureImage.hpp" />
+    <ClInclude Include="AmrTextureSampler.hpp" />
     <ClInclude Include="AmrValidationLayer.hpp" />
     <ClInclude Include="AmrVertex.hpp" />
     <ClInclude Include="AmrWindow.hpp" />
