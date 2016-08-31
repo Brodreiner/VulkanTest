@@ -1,5 +1,29 @@
 #pragma once
 
+struct UniformBufferObject {
+	glm::mat4 model;
+	glm::mat4 view;
+	glm::mat4 proj;
+};
+
+std::vector<AmrVertex> vertices = {
+	{ { -0.5f, -0.5f, 0.0f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 0.0f } },
+	{ { 0.5f, -0.5f, 0.0f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 0.0f } },
+	{ { 0.5f, 0.5f, 0.0f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 1.0f } },
+	{ { -0.5f, 0.5f, 0.0f },{ 1.0f, 1.0f, 1.0f },{ 0.0f, 1.0f } },
+
+	{ { -0.5f, -0.5f, -0.5f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 0.0f } },
+	{ { 0.5f, -0.5f, -0.5f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 0.0f } },
+	{ { 0.5f, 0.5f, -0.5f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 1.0f } },
+	{ { -0.5f, 0.5f, -0.5f },{ 1.0f, 1.0f, 1.0f },{ 0.0f, 1.0f } }
+};
+
+std::vector<uint32_t> indices = {
+	0, 1, 2, 2, 3, 0,
+	4, 5, 6, 6, 7, 4
+};
+
+
 class AmrEngine
 {
 	AmrWindow m_amrWindow;
@@ -22,6 +46,11 @@ class AmrEngine
 	AmrTextureImage m_amrTextureImage;
 	AmrImageView m_amrTextureImageView;
 	AmrTextureSampler m_amrTextureSampler;
+	AmrVertexBuffer m_amrVertexBuffer;
+	AmrIndexBuffer m_amrIndexBuffer;
+	AmrUniformBuffer m_amrUniformBuffer;
+	AmrDescriptorPool m_amrDescriptorPool;
+
 public:
 	AmrEngine(uint32_t width, uint32_t height, const std::string& title)
 		: m_amrWindow(width, height, title)
@@ -43,9 +72,17 @@ public:
 		, m_amrTextureImage(m_amrPhysicalDevice, m_amrDevice, m_amrCommandPool, m_amrGraphicsQueue, "textures/texture.jpg")
 		, m_amrTextureImageView(m_amrDevice, m_amrTextureImage, VK_FORMAT_R8G8B8A8_UNORM, VK_IMAGE_ASPECT_COLOR_BIT)
 		, m_amrTextureSampler(m_amrDevice)
+		, m_amrVertexBuffer(m_amrPhysicalDevice, m_amrDevice, m_amrGraphicsQueue, m_amrCommandPool, &(vertices[0]), sizeof(vertices[0]) * vertices.size())
+		, m_amrIndexBuffer(m_amrPhysicalDevice, m_amrDevice, m_amrGraphicsQueue, m_amrCommandPool, &(indices[0]), sizeof(indices[0]) * indices.size())
+		, m_amrUniformBuffer(m_amrPhysicalDevice, m_amrDevice, sizeof(UniformBufferObject))
+		, m_amrDescriptorPool (m_amrDevice)
 
 	{
+		m_amrWindow.setEventLoopCallback([&]() {
+		});
 		m_amrWindow.mainLoop();
+		vkQueueWaitIdle(m_amrGraphicsQueue);
+		std::cout << "Graphics Queue is idle now!" << std::endl;
 	}
 
 };

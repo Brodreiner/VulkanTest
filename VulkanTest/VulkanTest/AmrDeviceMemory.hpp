@@ -25,7 +25,12 @@ public:
 	AmrDeviceMemory(const AmrDeviceMemory&) = delete;
 	AmrDeviceMemory(AmrDeviceMemory&&) = delete;
 	AmrDeviceMemory& operator=(const AmrDeviceMemory&) = delete;
-	AmrDeviceMemory& operator=(AmrDeviceMemory&&) = delete;
+	AmrDeviceMemory& operator=(AmrDeviceMemory&& other)
+	{
+		std::swap(m_device, other.m_device);
+		std::swap(m_deviceMemory, other.m_deviceMemory);
+		return *this;
+	}
 
 
 	AmrDeviceMemory(VkPhysicalDevice physicalDevice, VkDevice device, VkMemoryRequirements memoryRequirements, VkMemoryPropertyFlags memoryPropertyFlags)
@@ -43,6 +48,18 @@ public:
 	{
 		if(m_deviceMemory != VK_NULL_HANDLE)
 			vkFreeMemory(m_device, m_deviceMemory, nullptr);
+	}
+
+	void writeData(const void* data, size_t size)
+	{
+		if (data == nullptr)
+			throw std::runtime_error("Texture cannot be copied, because source has no data!");
+		if (m_deviceMemory == VK_NULL_HANDLE)
+			throw std::runtime_error("Texture cannot be copied, because dest is not alloccated!");
+		void* bufferPtr;
+		vkMapMemory(m_device, m_deviceMemory, 0, static_cast<VkDeviceSize>(size), 0, &bufferPtr);
+		memcpy(bufferPtr, data, size);
+		vkUnmapMemory(m_device, m_deviceMemory);
 	}
 
 	operator VkDeviceMemory() const

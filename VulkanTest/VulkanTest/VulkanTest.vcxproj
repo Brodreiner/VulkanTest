@@ -178,6 +178,7 @@
     <ClInclude Include="AmrCommandPool.hpp" />
     <ClInclude Include="AmrDebugCallback.hpp" />
     <ClInclude Include="AmrDepthImage.hpp" />
+    <ClInclude Include="AmrDescriptorPool.hpp" />
     <ClInclude Include="AmrDescriptorSetLayout.hpp" />
     <ClInclude Include="AmrEngine.hpp" />
     <ClInclude Include="AmrFormat.hpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="AmrFramebufferStack.hpp" />
     <ClInclude Include="AmrImage.hpp" />
     <ClInclude Include="AmrImageView.hpp" />
+    <ClInclude Include="AmrIndexBuffer.hpp" />
     <ClInclude Include="AmrInstance.hpp" />
     <ClInclude Include="AmrDevice.hpp" />
     <ClInclude Include="AmrDeviceMemory.hpp" />
@@ -201,8 +203,10 @@
     <ClInclude Include="AmrTextureFile.hpp" />
     <ClInclude Include="AmrTextureImage.hpp" />
     <ClInclude Include="AmrTextureSampler.hpp" />
+    <ClInclude Include="AmrUniformBuffer.hpp" />
     <ClInclude Include="AmrValidationLayer.hpp" />
     <ClInclude Include="AmrVertex.hpp" />
+    <ClInclude Include="AmrVertexBuffer.hpp" />
     <ClInclude Include="AmrWindow.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

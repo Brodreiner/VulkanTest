@@ -29,6 +29,7 @@
 #include "AmrVertex.hpp"
 
 #include "AmrBuffer.hpp"
+
 #include "AmrFramebuffer.hpp"
 #include "AmrFramebufferStack.hpp"
 #include "AmrCommandBuffer.hpp"
@@ -57,7 +58,10 @@
 
 #include "AmrDepthImage.hpp"
 
-
+#include "AmrVertexBuffer.hpp"
+#include "AmrIndexBuffer.hpp"
+#include "AmrUniformBuffer.hpp"
+#include "AmrDescriptorPool.hpp"
 
 #include "AmrEngine.hpp"
 
@@ -65,6 +69,7 @@
 
 int main()
 {
-	AmrEngine amrEngine(800, 600, "Amr Engine");
+	AmrEngine* amrEngine = new AmrEngine(800, 600, "Amr Engine");
+	delete amrEngine;
 	return 0;
 }

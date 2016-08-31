@@ -121,6 +121,23 @@ public:
 		vkQueueWaitIdle(graphicsQueue);
 	}
 
+	void copyBuffer(VkQueue queue, VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) const
+	{
+		AmrCommandBuffer commandBuffer(m_device, m_commandPool, VK_COMMAND_BUFFER_LEVEL_PRIMARY);
+
+		commandBuffer.begin(VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
+
+		VkBufferCopy copyRegion = {};
+		copyRegion.size = size;
+		vkCmdCopyBuffer(commandBuffer, srcBuffer, dstBuffer, 1, &copyRegion);
+
+		commandBuffer.end();
+
+		commandBuffer.submit(queue);
+
+		vkQueueWaitIdle(queue);
+	}
+
 	operator VkCommandPool() const
 	{
 		return m_commandPool;

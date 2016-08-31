@@ -113,5 +113,17 @@
     <ClInclude Include="AmrBuffer.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="AmrVertexBuffer.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="AmrIndexBuffer.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="AmrUniformBuffer.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="AmrDescriptorPool.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
