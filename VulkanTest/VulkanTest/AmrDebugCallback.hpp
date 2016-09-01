@@ -15,6 +15,7 @@ public:
 	explicit AmrDebugCallback(VkInstance instance)
 		:m_instance(instance)
 	{
+#ifdef DEBUG_LAYER
 		VkDebugReportCallbackCreateInfoEXT createInfo = {};
 		createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT;
 		createInfo.flags = VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT;
@@ -24,6 +25,7 @@ public:
 			throw std::runtime_error("failed to set up debug callback: extention vkCreateDebugReportCallbackEXT not found!");
 		if(func(instance, &createInfo, nullptr, &m_callback) != VK_SUCCESS)
 			throw std::runtime_error("failed to set up debug callback: cannot register callback!");
+#endif
 	}
 
 	~AmrDebugCallback()
