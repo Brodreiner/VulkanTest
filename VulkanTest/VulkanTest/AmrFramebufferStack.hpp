@@ -1,5 +1,10 @@
 #pragma once
 
+#include <vulkan/vulkan.h>
+#include <vector>
+
+class AmrFramebuffer;
+
 class AmrFramebufferStack
 {
 	std::vector<AmrFramebuffer> m_framebuffers;
@@ -7,35 +12,14 @@ class AmrFramebufferStack
 	VkExtent2D m_extent;
 
 public:
-	AmrFramebufferStack(VkDevice device, std::vector<VkImageView> swapChainImageViews, VkImageView depthImageView, VkRenderPass renderPass, VkExtent2D extent)
-		: m_renderPass(renderPass)
-		, m_extent(extent)
-	{
-		for (size_t i = 0; i < swapChainImageViews.size(); i++)
-		{
-			std::vector<VkImageView> attachments = { swapChainImageViews[i], depthImageView };
-			m_framebuffers.emplace_back(device, renderPass, attachments, extent);
-		}
-	}
+	AmrFramebufferStack(VkDevice device, std::vector<VkImageView> swapChainImageViews, VkImageView depthImageView, VkRenderPass renderPass, VkExtent2D extent);
 
-	size_t size() const
-	{
-		return m_framebuffers.size();
-	}
+	size_t size() const;
 
-	const AmrFramebuffer& operator[] (size_t i) const
-	{
-		return m_framebuffers[i];
-	}
+	const AmrFramebuffer& operator[] (size_t i) const;
 
-	VkRenderPass getRenderPass() const
-	{
-		return m_renderPass;
-	}
+	VkRenderPass getRenderPass() const;
 
-	VkExtent2D getExtent() const
-	{
-		return m_extent;
-	}
+	VkExtent2D getExtent() const;
 
 };

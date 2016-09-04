@@ -150,6 +150,44 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AmrBuffer.cpp" />
+    <ClCompile Include="AmrCommandBuffer.cpp" />
+    <ClCompile Include="AmrCommandPool.cpp" />
+    <ClCompile Include="AmrDebugCallback.cpp" />
+    <ClCompile Include="AmrDepthImage.cpp" />
+    <ClCompile Include="AmrDescriptorPool.cpp" />
+    <ClCompile Include="AmrDescriptorSet.cpp" />
+    <ClCompile Include="AmrDescriptorSetLayout.cpp" />
+    <ClCompile Include="AmrDevice.cpp" />
+    <ClCompile Include="AmrDeviceMemory.cpp" />
+    <ClCompile Include="AmrEngine.cpp" />
+    <ClCompile Include="AmrFormat.cpp" />
+    <ClCompile Include="AmrFramebuffer.cpp" />
+    <ClCompile Include="AmrFramebufferStack.cpp" />
+    <ClCompile Include="AmrImage.cpp" />
+    <ClCompile Include="AmrImageView.cpp" />
+    <ClCompile Include="AmrIndexBuffer.cpp" />
+    <ClCompile Include="AmrInstance.cpp" />
+    <ClCompile Include="AmrPhysicalDevice.cpp" />
+    <ClCompile Include="AmrPipeline.cpp" />
+    <ClCompile Include="AmrPipelineLayout.cpp" />
+    <ClCompile Include="AmrQueue.cpp" />
+    <ClCompile Include="AmrQueueFamily.cpp" />
+    <ClCompile Include="AmrRenderPass.cpp" />
+    <ClCompile Include="AmrSemaphore.cpp" />
+    <ClCompile Include="AmrShader.cpp" />
+    <ClCompile Include="AmrSurface.cpp" />
+    <ClCompile Include="AmrSwapChain.cpp" />
+    <ClCompile Include="AmrSwapChainCommandBuffers.cpp" />
+    <ClCompile Include="AmrSwapChainImageViews.cpp" />
+    <ClCompile Include="AmrTextureFile.cpp" />
+    <ClCompile Include="AmrTextureImage.cpp" />
+    <ClCompile Include="AmrTextureSampler.cpp" />
+    <ClCompile Include="AmrUniformBuffer.cpp" />
+    <ClCompile Include="AmrValidationLayer.cpp" />
+    <ClCompile Include="AmrVertex.cpp" />
+    <ClCompile Include="AmrVertexBuffer.cpp" />
+    <ClCompile Include="AmrWindow.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
