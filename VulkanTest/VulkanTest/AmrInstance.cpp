@@ -60,7 +60,8 @@ AmrInstance::AmrInstance()
 
 AmrInstance::~AmrInstance()
 {
-	vkDestroyInstance(m_instance, nullptr);
+	if (m_instance != VK_NULL_HANDLE)
+		vkDestroyInstance(m_instance, nullptr);
 }
 
 AmrInstance::operator VkInstance() const

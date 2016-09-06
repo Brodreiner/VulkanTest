@@ -13,7 +13,8 @@ AmrSurface::AmrSurface(GLFWwindow* window, VkInstance instance)
 
 AmrSurface::~AmrSurface()
 {
-	vkDestroySurfaceKHR(m_instance, m_surface, nullptr);
+	if (m_surface != VK_NULL_HANDLE)
+		vkDestroySurfaceKHR(m_instance, m_surface, nullptr);
 }
 
 AmrSurface::operator VkSurfaceKHR() const

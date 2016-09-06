@@ -153,7 +153,8 @@ AmrSwapChain::AmrSwapChain(VkPhysicalDevice physicalDevice, VkDevice device, VkS
 
 AmrSwapChain::~AmrSwapChain()
 {
-	vkDestroySwapchainKHR(m_device, m_swapChain, nullptr);
+	if (m_swapChain != VK_NULL_HANDLE)
+		vkDestroySwapchainKHR(m_device, m_swapChain, nullptr);
 }
 
 std::vector<VkImageView> AmrSwapChain::getImageViews()

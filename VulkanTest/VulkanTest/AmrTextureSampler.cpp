@@ -26,7 +26,8 @@ AmrTextureSampler::AmrTextureSampler(VkDevice device)
 
 AmrTextureSampler::~AmrTextureSampler()
 {
-	vkDestroySampler(m_device, m_sampler, nullptr);
+	if (m_device != VK_NULL_HANDLE)
+		vkDestroySampler(m_device, m_sampler, nullptr);
 }
 
 AmrTextureSampler::operator VkSampler() const

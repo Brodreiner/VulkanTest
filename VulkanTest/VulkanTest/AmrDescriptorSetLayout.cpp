@@ -35,7 +35,8 @@ AmrDescriptorSetLayout::AmrDescriptorSetLayout(VkDevice device)
 
 AmrDescriptorSetLayout::~AmrDescriptorSetLayout()
 {
-	vkDestroyDescriptorSetLayout(m_device, m_descriptorSetLayout, nullptr);
+	if (m_descriptorSetLayout != VK_NULL_HANDLE)
+		vkDestroyDescriptorSetLayout(m_device, m_descriptorSetLayout, nullptr);
 }
 
 AmrDescriptorSetLayout::operator VkDescriptorSetLayout() const

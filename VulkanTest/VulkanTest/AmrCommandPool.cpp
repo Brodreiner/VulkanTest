@@ -16,7 +16,8 @@ AmrCommandPool::AmrCommandPool(VkDevice device, uint32_t queueFalilyIndex)
 
 AmrCommandPool::~AmrCommandPool()
 {
-	vkDestroyCommandPool(m_device, m_commandPool, nullptr);
+	if (m_commandPool != VK_NULL_HANDLE)
+		vkDestroyCommandPool(m_device, m_commandPool, nullptr);
 }
 
 void AmrCommandPool::transitionImageLayout(VkQueue graphicsQueue, VkImage image, VkImageLayout oldLayout, VkImageLayout newLayout) const

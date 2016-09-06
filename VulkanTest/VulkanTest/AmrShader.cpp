@@ -35,7 +35,8 @@ AmrShader::AmrShader(VkDevice device, const std::string& filename)
 
 AmrShader::~AmrShader()
 {
-	vkDestroyShaderModule(m_device, m_shader, nullptr);
+	if (m_shader != VK_NULL_HANDLE)
+		vkDestroyShaderModule(m_device, m_shader, nullptr);
 }
 
 AmrShader::operator VkShaderModule() const

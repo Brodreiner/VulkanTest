@@ -17,7 +17,8 @@ AmrTextureFile::AmrTextureFile(const std::string& filename)
 
 AmrTextureFile::~AmrTextureFile()
 {
-	stbi_image_free(m_data);
+	if (m_data != nullptr)
+		stbi_image_free(m_data);
 }
 
 VkExtent2D AmrTextureFile::extent()

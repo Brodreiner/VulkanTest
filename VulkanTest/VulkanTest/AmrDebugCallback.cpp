@@ -26,9 +26,12 @@ AmrDebugCallback::AmrDebugCallback(VkInstance instance)
 
 AmrDebugCallback::~AmrDebugCallback()
 {
-	auto func = (PFN_vkDestroyDebugReportCallbackEXT)vkGetInstanceProcAddr(m_instance, "vkDestroyDebugReportCallbackEXT");
-	if (func != nullptr)
+	if (m_instance != VK_NULL_HANDLE)
 	{
-		func(m_instance, m_callback, nullptr);
+		auto func = (PFN_vkDestroyDebugReportCallbackEXT)vkGetInstanceProcAddr(m_instance, "vkDestroyDebugReportCallbackEXT");
+		if (func != nullptr)
+		{
+			func(m_instance, m_callback, nullptr);
+		}
 	}
 }

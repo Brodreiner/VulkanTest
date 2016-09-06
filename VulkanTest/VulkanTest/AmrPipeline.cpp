@@ -123,7 +123,8 @@ AmrPipeline::AmrPipeline(VkDevice device, VkExtent2D swapChainExtent, VkPipeline
 
 AmrPipeline::~AmrPipeline()
 {
-	vkDestroyPipeline(m_device, m_pipeline, nullptr);
+	if (m_pipeline != VK_NULL_HANDLE)
+		vkDestroyPipeline(m_device, m_pipeline, nullptr);
 }
 
 AmrPipeline::operator VkPipeline() const

@@ -14,7 +14,8 @@ AmrSemaphore::AmrSemaphore(VkDevice device)
 
 AmrSemaphore::~AmrSemaphore()
 {
-	vkDestroySemaphore(m_device, m_semaphore, nullptr);
+	if (m_semaphore != VK_NULL_HANDLE)
+		vkDestroySemaphore(m_device, m_semaphore, nullptr);
 }
 
 AmrSemaphore::operator VkSemaphore() const

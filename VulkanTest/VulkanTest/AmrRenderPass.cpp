@@ -73,7 +73,8 @@ AmrRenderPass::AmrRenderPass(AmrPhysicalDevice amrPhysicalDevice, VkDevice devic
 
 AmrRenderPass::~AmrRenderPass()
 {
-	vkDestroyRenderPass(m_device, m_renderPass, nullptr);
+	if (m_renderPass != VK_NULL_HANDLE)
+		vkDestroyRenderPass(m_device, m_renderPass, nullptr);
 }
 
 AmrRenderPass::operator VkRenderPass() const

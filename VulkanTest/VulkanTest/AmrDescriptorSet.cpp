@@ -56,7 +56,6 @@ AmrDescriptorSet::AmrDescriptorSet(VkDevice device, VkDescriptorSetLayout descri
 AmrDescriptorSet::~AmrDescriptorSet()
 {
 	// not needed
-	//vkFreeDescriptorSets(m_device, m_descriptorPool, 1, &m_descriptorSet);
 }
 
 AmrDescriptorSet::operator VkDescriptorSet() const

@@ -20,7 +20,8 @@ AmrPipelineLayout::AmrPipelineLayout(VkDevice device, VkDescriptorSetLayout desc
 
 AmrPipelineLayout::~AmrPipelineLayout()
 {
-	vkDestroyPipelineLayout(m_device, m_pipelineLayout, nullptr);
+	if (m_pipelineLayout != VK_NULL_HANDLE)
+		vkDestroyPipelineLayout(m_device, m_pipelineLayout, nullptr);
 }
 
 AmrPipelineLayout::operator VkPipelineLayout() const

@@ -30,7 +30,8 @@ AmrDevice::AmrDevice(VkPhysicalDevice physicalDevice, size_t deviceQueueCreateIn
 
 AmrDevice::~AmrDevice()
 {
-	vkDestroyDevice(m_device, nullptr);
+	if (m_device != VK_NULL_HANDLE)
+		vkDestroyDevice(m_device, nullptr);
 }
 
 AmrDevice::operator VkDevice() const

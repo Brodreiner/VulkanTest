@@ -26,7 +26,8 @@ AmrDescriptorPool::AmrDescriptorPool(VkDevice device)
 
 AmrDescriptorPool::~AmrDescriptorPool()
 {
-	vkDestroyDescriptorPool(m_device, m_descriptorPool, nullptr);
+	if (m_descriptorPool != VK_NULL_HANDLE)
+		vkDestroyDescriptorPool(m_device, m_descriptorPool, nullptr);
 }
 
 AmrDescriptorPool::operator VkDescriptorPool() const
