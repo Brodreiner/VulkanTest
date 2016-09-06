@@ -4,7 +4,7 @@
 
 class AmrDevice
 {
-	VkDevice m_device;
+	VkDevice m_device = VK_NULL_HANDLE;
 
 public:
 	AmrDevice(VkPhysicalDevice physicalDevice, size_t deviceQueueCreateInfoSize, const VkDeviceQueueCreateInfo* deviceQueueCreateInfoData);

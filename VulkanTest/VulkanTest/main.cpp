@@ -1,5 +1,3 @@
-#define DEBUG_LAYER
-
 #include "AmrEngine.hpp"
 
 int main()

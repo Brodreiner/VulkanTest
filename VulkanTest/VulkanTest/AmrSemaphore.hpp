@@ -4,8 +4,8 @@
 
 class AmrSemaphore
 {
-	VkDevice m_device;
-	VkSemaphore m_semaphore;
+	VkDevice m_device = VK_NULL_HANDLE;
+	VkSemaphore m_semaphore = VK_NULL_HANDLE;
 
 public:
 

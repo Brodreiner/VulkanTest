@@ -4,9 +4,9 @@
 
 class AmrCommandBuffer
 {
-	VkDevice m_device;
-	VkCommandPool m_commandPool;
-	VkCommandBuffer m_commandBuffer;
+	VkDevice m_device = VK_NULL_HANDLE;
+	VkCommandPool m_commandPool = VK_NULL_HANDLE;
+	VkCommandBuffer m_commandBuffer = VK_NULL_HANDLE;
 
 public:
 	AmrCommandBuffer(VkDevice device, VkCommandPool commandPool, VkCommandBufferLevel commandBufferLevel);

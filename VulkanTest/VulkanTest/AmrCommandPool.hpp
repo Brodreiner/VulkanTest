@@ -4,8 +4,8 @@
 
 class AmrCommandPool
 {
-	VkCommandPool m_commandPool;
-	VkDevice m_device;
+	VkCommandPool m_commandPool = VK_NULL_HANDLE;
+	VkDevice m_device = VK_NULL_HANDLE;
 
 public:
 

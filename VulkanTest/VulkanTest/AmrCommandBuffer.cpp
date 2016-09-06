@@ -16,7 +16,8 @@ AmrCommandBuffer::AmrCommandBuffer(VkDevice device, VkCommandPool commandPool, V
 
 AmrCommandBuffer::~AmrCommandBuffer()
 {
-	vkFreeCommandBuffers(m_device, m_commandPool, 1, &m_commandBuffer);
+	if(m_commandPool != VK_NULL_HANDLE)
+		vkFreeCommandBuffers(m_device, m_commandPool, 1, &m_commandBuffer);
 }
 
 void AmrCommandBuffer::begin(VkCommandBufferUsageFlags flags)

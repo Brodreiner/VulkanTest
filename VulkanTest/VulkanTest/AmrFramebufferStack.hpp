@@ -8,8 +8,8 @@ class AmrFramebuffer;
 class AmrFramebufferStack
 {
 	std::vector<AmrFramebuffer> m_framebuffers;
-	VkRenderPass m_renderPass;
-	VkExtent2D m_extent;
+	VkRenderPass m_renderPass = VK_NULL_HANDLE;
+	VkExtent2D m_extent = {0, 0};
 
 public:
 	AmrFramebufferStack(VkDevice device, std::vector<VkImageView> swapChainImageViews, VkImageView depthImageView, VkRenderPass renderPass, VkExtent2D extent);

@@ -4,8 +4,8 @@
 
 class AmrDescriptorPool
 {
-	VkDevice m_device;
-	VkDescriptorPool m_descriptorPool;
+	VkDevice m_device = VK_NULL_HANDLE;
+	VkDescriptorPool m_descriptorPool = VK_NULL_HANDLE;
 
 public:
 	AmrDescriptorPool(VkDevice device);

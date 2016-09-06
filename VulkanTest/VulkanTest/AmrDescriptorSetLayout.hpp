@@ -4,8 +4,8 @@
 
 class AmrDescriptorSetLayout
 {
-	VkDescriptorSetLayout m_descriptorSetLayout;
-	VkDevice m_device;
+	VkDescriptorSetLayout m_descriptorSetLayout = VK_NULL_HANDLE;
+	VkDevice m_device = VK_NULL_HANDLE;
 
 public:
 	AmrDescriptorSetLayout(const AmrDescriptorSetLayout&) = delete;

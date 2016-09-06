@@ -29,8 +29,9 @@ VkPresentModeKHR AmrSwapChain::chooseSwapPresentMode(const std::vector<VkPresent
 	return VK_PRESENT_MODE_FIFO_KHR;
 }
 
-VkExtent2D AmrSwapChain::chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities, VkExtent2D desiredExtent)
+VkExtent2D AmrSwapChain::chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities)
 {
+	VkExtent2D desiredExtent = { 100, 100 };
 	if (capabilities.currentExtent.width == std::numeric_limits<uint32_t>::max())
 	{
 		// we can choose the extent freely
@@ -71,13 +72,13 @@ AmrSwapChain::SwapChainSupportDetails AmrSwapChain::querySwapChainSupport(VkPhys
 	return details;
 }
 
-void AmrSwapChain::createSwapChain(VkPhysicalDevice physicalDevice, VkSurfaceKHR surface, uint32_t graphicsQueueFamilyIndex, uint32_t presentQueueFamilyIndex, VkExtent2D desiredExtent)
+void AmrSwapChain::createSwapChain(VkPhysicalDevice physicalDevice, VkSurfaceKHR surface, uint32_t graphicsQueueFamilyIndex, uint32_t presentQueueFamilyIndex)
 {
 	SwapChainSupportDetails swapChainSupport = querySwapChainSupport(physicalDevice, surface);
 
 	VkSurfaceFormatKHR surfaceFormat = chooseSwapSurfaceFormat(swapChainSupport.formats);
 	VkPresentModeKHR presentMode = chooseSwapPresentMode(swapChainSupport.presentModes);
-	VkExtent2D extent = chooseSwapExtent(swapChainSupport.capabilities, desiredExtent);
+	VkExtent2D extent = chooseSwapExtent(swapChainSupport.capabilities);
 
 	uint32_t imageCount = swapChainSupport.capabilities.minImageCount + 1;
 	if (swapChainSupport.capabilities.maxImageCount > 0 && imageCount > swapChainSupport.capabilities.maxImageCount) {
@@ -143,10 +144,10 @@ void AmrSwapChain::createImageViews()
 	}
 }
 
-AmrSwapChain::AmrSwapChain(VkPhysicalDevice physicalDevice, VkDevice device, VkSurfaceKHR surface, uint32_t graphicsQueueFamilyIndex, uint32_t presentQueueFamilyIndex, VkExtent2D desiredExtent)
+AmrSwapChain::AmrSwapChain(VkPhysicalDevice physicalDevice, VkDevice device, VkSurfaceKHR surface, uint32_t graphicsQueueFamilyIndex, uint32_t presentQueueFamilyIndex)
 	:m_device(device)
 {
-	createSwapChain(physicalDevice, surface, graphicsQueueFamilyIndex, presentQueueFamilyIndex, desiredExtent);
+	createSwapChain(physicalDevice, surface, graphicsQueueFamilyIndex, presentQueueFamilyIndex);
 	createImageViews();
 }
 

@@ -44,16 +44,8 @@ AmrEngine::AmrEngine(uint32_t width, uint32_t height, const std::string& title)
 	, m_amrPhysicalDevice(m_amrInstance, m_amrSurface)
 	, m_amrQueueFamily(m_amrPhysicalDevice, m_amrSurface)
 	, m_amrDevice(m_amrPhysicalDevice, m_amrQueueFamily.getDeviceQueueCreateInfoSize(), m_amrQueueFamily.getDeviceQueueCreateInfoData())
-	, m_amrGraphicsQueue(m_amrDevice, m_amrQueueFamily.getGraphicsQueueFamilyIndex(), 0)
-	, m_amrPresentQueue(m_amrDevice, m_amrQueueFamily.getPresentQueueFamilyIndex(), 0)
-	, m_amrSwapChain(m_amrPhysicalDevice, m_amrDevice, m_amrSurface, m_amrQueueFamily.getGraphicsQueueFamilyIndex(), m_amrQueueFamily.getPresentQueueFamilyIndex(), { width, height })
-	, m_amrRenderPass(m_amrPhysicalDevice, m_amrDevice, m_amrSwapChain.getImageFormat())
-	, m_amrDescriptorSetLayout(m_amrDevice)
-	, m_amrPipelineLayout(m_amrDevice, m_amrDescriptorSetLayout)
-	, m_amrPipeline(m_amrDevice, m_amrSwapChain.getExtent(), m_amrPipelineLayout, m_amrRenderPass)
-	, m_amrCommandPool(m_amrDevice, m_amrQueueFamily.getGraphicsQueueFamilyIndex())
-	, m_amrDepthImage(m_amrPhysicalDevice, m_amrGraphicsQueue, m_amrCommandPool, m_amrDevice, m_amrSwapChain.getExtent())
-	, m_amrFramebufferStack(m_amrDevice, m_amrSwapChain.getImageViews(), m_amrDepthImage.getImageView(), m_amrRenderPass, m_amrSwapChain.getExtent())
+
+
 	, m_amrTextureImage(m_amrPhysicalDevice, m_amrDevice, m_amrCommandPool, m_amrGraphicsQueue, "textures/texture.jpg")
 	, m_amrTextureImageView(m_amrDevice, m_amrTextureImage, VK_FORMAT_R8G8B8A8_UNORM, VK_IMAGE_ASPECT_COLOR_BIT)
 	, m_amrTextureSampler(m_amrDevice)
@@ -62,6 +54,21 @@ AmrEngine::AmrEngine(uint32_t width, uint32_t height, const std::string& title)
 	, m_amrUniformBuffer(m_amrPhysicalDevice, m_amrDevice, sizeof(UniformBufferObject))
 	, m_amrDescriptorPool(m_amrDevice)
 	, m_amrDescriptorSet(m_amrDevice, m_amrDescriptorSetLayout, m_amrDescriptorPool, m_amrUniformBuffer, m_amrTextureImageView, m_amrTextureSampler)
+
+
+	, m_amrGraphicsQueue(m_amrDevice, m_amrQueueFamily.getGraphicsQueueFamilyIndex(), 0)
+	, m_amrPresentQueue(m_amrDevice, m_amrQueueFamily.getPresentQueueFamilyIndex(), 0)
+	, m_amrDescriptorSetLayout(m_amrDevice)
+	, m_amrPipelineLayout(m_amrDevice, m_amrDescriptorSetLayout)
+	, m_amrCommandPool(m_amrDevice, m_amrQueueFamily.getGraphicsQueueFamilyIndex())
+
+
+	, m_amrSwapChain(m_amrPhysicalDevice, m_amrDevice, m_amrSurface, m_amrQueueFamily.getGraphicsQueueFamilyIndex(), m_amrQueueFamily.getPresentQueueFamilyIndex())
+
+	, m_amrRenderPass(m_amrPhysicalDevice, m_amrDevice, m_amrSwapChain.getImageFormat())
+	, m_amrPipeline(m_amrDevice, m_amrSwapChain.getExtent(), m_amrPipelineLayout, m_amrRenderPass)
+	, m_amrDepthImage(m_amrPhysicalDevice, m_amrGraphicsQueue, m_amrCommandPool, m_amrDevice, m_amrSwapChain.getExtent())
+	, m_amrFramebufferStack(m_amrDevice, m_amrSwapChain.getImageViews(), m_amrDepthImage.getImageView(), m_amrRenderPass, m_amrSwapChain.getExtent())
 	, m_amrSwapChainCommandBuffers(m_amrDevice, m_amrCommandPool, m_amrPipeline, m_amrVertexBuffer, m_amrIndexBuffer, static_cast<uint32_t>(indices.size()), m_amrPipelineLayout, m_amrDescriptorSet, m_amrFramebufferStack)
 	, m_amrImageAvailableSemaphore(m_amrDevice)
 	, m_amrRenderFinishedSemaphore(m_amrDevice)
@@ -76,6 +83,16 @@ AmrEngine::AmrEngine(uint32_t width, uint32_t height, const std::string& title)
 	std::cout << "Graphics Queue is idle now!" << std::endl;
 }
 
+void recreateSwapChain()
+{
+	//createSwapChain();
+	//createImageViews();
+	//createRenderPass();
+	//createGraphicsPipeline();
+	//createDepthResources();
+	//createFramebuffers();
+	//createCommandBuffers();
+}
 
 void AmrEngine::updateUniformBuffer()
 {

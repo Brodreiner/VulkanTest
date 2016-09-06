@@ -4,8 +4,8 @@
 
 class AmrPipelineLayout
 {
-	VkDevice m_device;
-	VkPipelineLayout m_pipelineLayout;
+	VkDevice m_device = VK_NULL_HANDLE;
+	VkPipelineLayout m_pipelineLayout = VK_NULL_HANDLE;
 
 public:
 	AmrPipelineLayout(const AmrPipelineLayout&) = delete;

@@ -8,7 +8,7 @@ struct GLFWwindow;
 
 class AmrWindow
 {
-	GLFWwindow* m_window;
+	GLFWwindow* m_window = nullptr;
 	std::function<void(int, int)> m_resizeCallback = defaultResizeCallback;
 	std::function<void()> m_eventLoopCallback = []() {};
 

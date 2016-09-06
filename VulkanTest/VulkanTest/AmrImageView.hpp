@@ -4,8 +4,8 @@
 
 class AmrImageView
 {
-	VkImageView m_imageView;
-	VkDevice m_device;
+	VkImageView m_imageView = VK_NULL_HANDLE;
+	VkDevice m_device = VK_NULL_HANDLE;
 public:
 	
 	AmrImageView(const AmrImageView&) = delete;

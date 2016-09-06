@@ -5,8 +5,8 @@
 
 class AmrShader
 {
-	VkShaderModule m_shader;
-	VkDevice m_device;
+	VkShaderModule m_shader = VK_NULL_HANDLE;
+	VkDevice m_device = VK_NULL_HANDLE;
 
 	static std::vector<char> readFile(const std::string& filename);
 

@@ -5,8 +5,8 @@
 
 class AmrFramebuffer
 {
-	VkDevice m_device;
-	VkFramebuffer m_framebuffer;
+	VkDevice m_device = VK_NULL_HANDLE;
+	VkFramebuffer m_framebuffer = VK_NULL_HANDLE;
 
 public:
 	AmrFramebuffer(const AmrFramebuffer&) = delete;

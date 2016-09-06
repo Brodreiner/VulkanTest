@@ -4,7 +4,7 @@
 #include <vector>
 
 class AmrInstance {
-	VkInstance m_instance;
+	VkInstance m_instance = VK_NULL_HANDLE;
 
 	static std::vector<const char*> getRequiredExtensions();
 

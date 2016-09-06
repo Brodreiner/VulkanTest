@@ -4,8 +4,8 @@
 
 class AmrPipeline
 {
-	VkPipeline m_pipeline;
-	VkDevice m_device;
+	VkPipeline m_pipeline = VK_NULL_HANDLE;
+	VkDevice m_device = VK_NULL_HANDLE;
 
 public:
 	AmrPipeline(const AmrPipeline&) = delete;

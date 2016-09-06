@@ -11,7 +11,7 @@ class AmrUniformBuffer
 	AmrBuffer m_amrGpuBuffer;
 	AmrDeviceMemory m_amrStagingMemory;
 	AmrDeviceMemory m_amrGpuMemory;
-	VkDeviceSize m_size;
+	VkDeviceSize m_size = 0;
 
 public:
 	AmrUniformBuffer(VkPhysicalDevice physicalDevice, VkDevice device, VkDeviceSize size);

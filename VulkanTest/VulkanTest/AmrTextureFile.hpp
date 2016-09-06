@@ -6,9 +6,9 @@
 
 class AmrTextureFile
 {
-	VkExtent2D m_extent;
-	stbi_uc* m_data;
-	size_t m_size;
+	VkExtent2D m_extent = { 0, 0 };
+	stbi_uc* m_data = nullptr;
+	size_t m_size = 0;
 
 public:
 	AmrTextureFile(const std::string& filename);

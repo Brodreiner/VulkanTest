@@ -6,7 +6,7 @@
 
 class AmrPhysicalDevice
 {
-	VkPhysicalDevice m_physicalDevice;
+	VkPhysicalDevice m_physicalDevice = VK_NULL_HANDLE;
 
 	static constexpr std::array<const char*, 1> deviceExtensions =
 	{

@@ -6,8 +6,8 @@ class AmrPhysicalDevice;
 
 class AmrRenderPass
 {
-	VkDevice m_device;
-	VkRenderPass m_renderPass;
+	VkDevice m_device = VK_NULL_HANDLE;
+	VkRenderPass m_renderPass = VK_NULL_HANDLE;
 
 	void createRenderPass(VkFormat swapChainImageFormat, const AmrPhysicalDevice& amrPhysicalDevice);
 
