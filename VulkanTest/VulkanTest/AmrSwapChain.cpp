@@ -158,10 +158,12 @@ AmrSwapChain& AmrSwapChain::operator=(AmrSwapChain&& other)
 	return *this;
 }
 
-AmrSwapChain::AmrSwapChain(VkPhysicalDevice physicalDevice, VkDevice device, VkSurfaceKHR surface, uint32_t graphicsQueueFamilyIndex, uint32_t presentQueueFamilyIndex)
+AmrSwapChain::AmrSwapChain(VkPhysicalDevice physicalDevice, VkDevice device, VkSurfaceKHR surface, uint32_t graphicsQueueFamilyIndex, uint32_t presentQueueFamilyIndex, AmrSwapChain& oldAmrSwapChain)
 	:m_device(device)
+	,m_swapChain(oldAmrSwapChain.m_swapChain)
 {
 	createSwapChain(physicalDevice, surface, graphicsQueueFamilyIndex, presentQueueFamilyIndex);
+	oldAmrSwapChain.m_swapChain = VK_NULL_HANDLE;
 	createImageViews();
 }
 

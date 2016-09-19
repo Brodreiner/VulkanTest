@@ -21,7 +21,7 @@ public:
 	AmrWindow(const AmrWindow&) = delete;
 	AmrWindow(AmrWindow&&) = delete;
 	AmrWindow& operator=(const AmrWindow&) = delete;
-	AmrWindow& operator=(AmrWindow&& other) = default;
+	AmrWindow& operator=(AmrWindow&& other);
 	~AmrWindow() = default;
 
 	AmrWindow(uint32_t width, uint32_t height, const std::string& title);

@@ -40,7 +40,7 @@ public:
 	AmrSwapChain& operator=(AmrSwapChain&& other);
 	~AmrSwapChain();
 
-	AmrSwapChain(VkPhysicalDevice physicalDevice, VkDevice device, VkSurfaceKHR surface, uint32_t graphicsQueueFamilyIndex, uint32_t presentQueueFamilyIndex);
+	AmrSwapChain(VkPhysicalDevice physicalDevice, VkDevice device, VkSurfaceKHR surface, uint32_t graphicsQueueFamilyIndex, uint32_t presentQueueFamilyIndex, AmrSwapChain& oldAmrSwapChain);
 
 	std::vector<VkImageView> getImageViews();
 

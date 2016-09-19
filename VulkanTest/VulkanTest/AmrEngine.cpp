@@ -48,45 +48,34 @@ AmrEngine::AmrEngine(uint32_t width, uint32_t height, const std::string& title)
 	m_amrDevice = AmrDevice(m_amrPhysicalDevice, m_amrQueueFamily.getDeviceQueueCreateInfoSize(), m_amrQueueFamily.getDeviceQueueCreateInfoData());
 	m_amrGraphicsQueue = AmrQueue(m_amrDevice, m_amrQueueFamily.getGraphicsQueueFamilyIndex(), 0);
 	m_amrPresentQueue = AmrQueue(m_amrDevice, m_amrQueueFamily.getPresentQueueFamilyIndex(), 0);
-	m_amrSwapChain = AmrSwapChain(m_amrPhysicalDevice, m_amrDevice, m_amrSurface, m_amrQueueFamily.getGraphicsQueueFamilyIndex(), m_amrQueueFamily.getPresentQueueFamilyIndex());
-	m_amrRenderPass = AmrRenderPass(m_amrPhysicalDevice, m_amrDevice, m_amrSwapChain.getImageFormat());
-	m_amrDescriptorSetLayout = AmrDescriptorSetLayout(m_amrDevice);
-	m_amrPipelineLayout = AmrPipelineLayout(m_amrDevice, m_amrDescriptorSetLayout);
-	m_amrPipeline = AmrPipeline(m_amrDevice, m_amrSwapChain.getExtent(), m_amrPipelineLayout, m_amrRenderPass);
 	m_amrCommandPool = AmrCommandPool(m_amrDevice, m_amrQueueFamily.getGraphicsQueueFamilyIndex());
-	m_amrDepthImage = AmrDepthImage(m_amrPhysicalDevice, m_amrGraphicsQueue, m_amrCommandPool, m_amrDevice, m_amrSwapChain.getExtent());
-	m_amrFramebufferStack = AmrFramebufferStack(m_amrDevice, m_amrSwapChain.getImageViews(), m_amrDepthImage.getImageView(), m_amrRenderPass, m_amrSwapChain.getExtent());
+
 	m_amrTextureImage = AmrTextureImage(m_amrPhysicalDevice, m_amrDevice, m_amrCommandPool, m_amrGraphicsQueue, "textures/texture.jpg");
 	m_amrTextureImageView = AmrImageView(m_amrDevice, m_amrTextureImage, VK_FORMAT_R8G8B8A8_UNORM, VK_IMAGE_ASPECT_COLOR_BIT);
 	m_amrTextureSampler = AmrTextureSampler(m_amrDevice);
 	m_amrVertexBuffer = AmrVertexBuffer(m_amrPhysicalDevice, m_amrDevice, m_amrGraphicsQueue, m_amrCommandPool, &(vertices[0]), sizeof(vertices[0]) * vertices.size());
 	m_amrIndexBuffer = AmrIndexBuffer(m_amrPhysicalDevice, m_amrDevice, m_amrGraphicsQueue, m_amrCommandPool, &(indices[0]), sizeof(indices[0]) * indices.size());
 	m_amrUniformBuffer = AmrUniformBuffer(m_amrPhysicalDevice, m_amrDevice, sizeof(UniformBufferObject));
+	m_amrDescriptorSetLayout = AmrDescriptorSetLayout(m_amrDevice);
 	m_amrDescriptorPool = AmrDescriptorPool(m_amrDevice);
 	m_amrDescriptorSet = AmrDescriptorSet(m_amrDevice, m_amrDescriptorSetLayout, m_amrDescriptorPool, m_amrUniformBuffer, m_amrTextureImageView, m_amrTextureSampler);
-	m_amrSwapChainCommandBuffers = AmrSwapChainCommandBuffers(m_amrDevice, m_amrCommandPool, m_amrPipeline, m_amrVertexBuffer, m_amrIndexBuffer, static_cast<uint32_t>(indices.size()), m_amrPipelineLayout, m_amrDescriptorSet, m_amrFramebufferStack);
 	m_amrImageAvailableSemaphore = AmrSemaphore(m_amrDevice);
 	m_amrRenderFinishedSemaphore = AmrSemaphore(m_amrDevice);
 
+	recreateSwapChain();
 
 	m_amrWindow.setEventLoopCallback([&]() {
 		updateUniformBuffer();
 		drawFrame();
 	});
+
+	m_amrWindow.setResizeCallback([&](int width, int height) {
+		recreateSwapChain();
+	});
+
 	m_amrWindow.mainLoop();
 	vkQueueWaitIdle(m_amrGraphicsQueue);
 	std::cout << "Graphics Queue is idle now!" << std::endl;
-}
-
-void recreateSwapChain()
-{
-	//createSwapChain();
-	//createImageViews();
-	//createRenderPass();
-	//createGraphicsPipeline();
-	//createDepthResources();
-	//createFramebuffers();
-	//createCommandBuffers();
 }
 
 void AmrEngine::updateUniformBuffer()
@@ -108,7 +97,14 @@ void AmrEngine::updateUniformBuffer()
 
 void AmrEngine::recreateSwapChain()
 {
-	throw std::runtime_error("Recreate SwapChain not yet implemented!");
+	vkDeviceWaitIdle(m_amrDevice);
+	m_amrSwapChain = AmrSwapChain(m_amrPhysicalDevice, m_amrDevice, m_amrSurface, m_amrQueueFamily.getGraphicsQueueFamilyIndex(), m_amrQueueFamily.getPresentQueueFamilyIndex(), m_amrSwapChain);
+	m_amrRenderPass = AmrRenderPass(m_amrPhysicalDevice, m_amrDevice, m_amrSwapChain.getImageFormat());
+	m_amrPipelineLayout = AmrPipelineLayout(m_amrDevice, m_amrDescriptorSetLayout);
+	m_amrPipeline = AmrPipeline(m_amrDevice, m_amrSwapChain.getExtent(), m_amrPipelineLayout, m_amrRenderPass);
+	m_amrDepthImage = AmrDepthImage(m_amrPhysicalDevice, m_amrGraphicsQueue, m_amrCommandPool, m_amrDevice, m_amrSwapChain.getExtent());
+	m_amrFramebufferStack = AmrFramebufferStack(m_amrDevice, m_amrSwapChain.getImageViews(), m_amrDepthImage.getImageView(), m_amrRenderPass, m_amrSwapChain.getExtent());
+	m_amrSwapChainCommandBuffers = AmrSwapChainCommandBuffers(m_amrDevice, m_amrCommandPool, m_amrPipeline, m_amrVertexBuffer, m_amrIndexBuffer, static_cast<uint32_t>(indices.size()), m_amrPipelineLayout, m_amrDescriptorSet, m_amrFramebufferStack);
 }
 
 void AmrEngine::drawFrame()

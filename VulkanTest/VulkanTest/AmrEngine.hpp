@@ -47,12 +47,12 @@ class AmrEngine
 	AmrDevice m_amrDevice;
 	AmrQueue m_amrGraphicsQueue;
 	AmrQueue m_amrPresentQueue;
+	AmrCommandPool m_amrCommandPool;
 	AmrSwapChain m_amrSwapChain;
 	AmrRenderPass m_amrRenderPass;
 	AmrDescriptorSetLayout m_amrDescriptorSetLayout;
 	AmrPipelineLayout m_amrPipelineLayout;
 	AmrPipeline m_amrPipeline;
-	AmrCommandPool m_amrCommandPool;
 	AmrDepthImage m_amrDepthImage;
 	AmrFramebufferStack m_amrFramebufferStack;
 	AmrTextureImage m_amrTextureImage;

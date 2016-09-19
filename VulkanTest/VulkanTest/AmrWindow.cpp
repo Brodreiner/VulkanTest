@@ -4,6 +4,15 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
+AmrWindow& AmrWindow::operator=(AmrWindow&& other)
+{
+	m_eventLoopCallback = other.m_eventLoopCallback;
+	m_resizeCallback = other.m_resizeCallback;
+	m_window = other.m_window;
+	glfwSetWindowUserPointer(m_window, this);
+	return *this;
+}
+
 void AmrWindow::onWindowResized(GLFWwindow* window, int width, int height)
 {
 	AmrWindow* app = reinterpret_cast<AmrWindow*>(glfwGetWindowUserPointer(window));
