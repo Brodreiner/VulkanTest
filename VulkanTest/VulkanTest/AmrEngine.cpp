@@ -10,6 +10,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <GLFW/glfw3.h>
+
 #include <iostream>
 #include <chrono>
 
@@ -71,6 +73,31 @@ AmrEngine::AmrEngine(uint32_t width, uint32_t height, const std::string& title)
 
 	m_amrWindow.setResizeCallback([&](int width, int height) {
 		recreateSwapChain();
+	});
+
+	m_amrWindow.setKeyCallback([&](int key, int scancode, int action, int mods)
+	{
+		if (key == GLFW_KEY_E && action == GLFW_PRESS)
+			std::cout << "E has been pressed!" << std::endl;
+		if (key == GLFW_KEY_E && action == GLFW_RELEASE)
+			std::cout << "E has been released!" << std::endl;
+	});
+
+	m_amrWindow.setMouseMoveCallback([&](double xpos, double ypos)
+	{
+		std::cout << "Mouse position: " << xpos << " x " << ypos << std::endl;
+	});
+
+	m_amrWindow.setMouseClickCallback([&](int button, int action, int mods)
+	{
+		if (button == GLFW_MOUSE_BUTTON_LEFT)
+		{
+			if(action == GLFW_PRESS)
+				m_amrWindow.disableCursor();
+			if (action == GLFW_RELEASE)
+				m_amrWindow.enableCursor();
+		}
+		std::cout << "Mouse click: button=" << button << " action=" << action << " mods=" << mods << std::endl;
 	});
 
 	m_amrWindow.mainLoop();
