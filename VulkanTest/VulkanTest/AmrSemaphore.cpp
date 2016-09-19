@@ -9,6 +9,7 @@ AmrSemaphore& AmrSemaphore::operator=(AmrSemaphore&& other)
 		vkDestroySemaphore(m_device, m_semaphore, nullptr);
 	m_device = other.m_device;
 	m_semaphore = other.m_semaphore;
+	other.m_semaphore = VK_NULL_HANDLE;
 	return *this;
 }
 

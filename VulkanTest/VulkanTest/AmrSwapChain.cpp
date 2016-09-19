@@ -154,7 +154,7 @@ AmrSwapChain& AmrSwapChain::operator=(AmrSwapChain&& other)
 	m_swapChainExtent = other.m_swapChainExtent;
 	m_swapChainImageFormat = other.m_swapChainImageFormat;
 	m_swapChainImages = std::move(other.m_swapChainImages);
-	m_swapChain = VK_NULL_HANDLE;
+	other.m_swapChain = VK_NULL_HANDLE;
 	return *this;
 }
 
