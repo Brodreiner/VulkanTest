@@ -11,9 +11,14 @@ class AmrTextureFile
 	size_t m_size = 0;
 
 public:
-	AmrTextureFile(const std::string& filename);
-
+	AmrTextureFile() = default;
+	AmrTextureFile(const AmrTextureFile&) = delete;
+	AmrTextureFile(AmrTextureFile&&) = delete;
+	AmrTextureFile& operator=(const AmrTextureFile&) = delete;
+	AmrTextureFile& operator=(AmrTextureFile&& other);
 	~AmrTextureFile();
+
+	AmrTextureFile(const std::string& filename);
 
 	VkExtent2D extent();
 

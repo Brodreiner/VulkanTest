@@ -39,6 +39,7 @@ std::vector<uint32_t> indices = {
 
 AmrEngine::AmrEngine(uint32_t width, uint32_t height, const std::string& title)
 	: m_amrWindow(width, height, title)
+	, m_amrInstance("Vulkan Test")
 	, m_amrDebugCallback(m_amrInstance)
 	, m_amrSurface(m_amrWindow, m_amrInstance)
 	, m_amrPhysicalDevice(m_amrInstance, m_amrSurface)

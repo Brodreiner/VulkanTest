@@ -5,6 +5,17 @@
 #include "AmrTextureFile.hpp"
 #include <string>
 
+AmrTextureFile& AmrTextureFile::operator=(AmrTextureFile&& other)
+{
+	if (m_data != nullptr)
+		stbi_image_free(m_data);
+	m_data = other.m_data;
+	m_extent = other.m_extent;
+	m_size = other.m_size;
+	other.m_data = nullptr;
+	return *this;
+}
+
 AmrTextureFile::AmrTextureFile(const std::string& filename)
 {
 	int texWidth, texHeight, texChannels;

@@ -5,6 +5,16 @@
 #include "AmrPhysicalDevice.hpp"
 #include "AmrValidationLayer.hpp"
 
+AmrDevice& AmrDevice::operator=(AmrDevice&& other)
+{
+	if (m_device != VK_NULL_HANDLE)
+		vkDestroyDevice(m_device, nullptr);
+	m_device = other.m_device;
+	other.m_device = VK_NULL_HANDLE;
+	return *this;
+}
+
+
 AmrDevice::AmrDevice(VkPhysicalDevice physicalDevice, size_t deviceQueueCreateInfoSize, const VkDeviceQueueCreateInfo* deviceQueueCreateInfoData)
 {
 	VkPhysicalDeviceFeatures deviceFeatures = {};

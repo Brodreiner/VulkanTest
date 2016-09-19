@@ -33,10 +33,14 @@ class AmrSwapChain
 	void createImageViews();
 
 public:
+	AmrSwapChain() = default;
+	AmrSwapChain(const AmrSwapChain&) = delete;
+	AmrSwapChain(AmrSwapChain&&) = delete;
+	AmrSwapChain& operator=(const AmrSwapChain&) = delete;
+	AmrSwapChain& operator=(AmrSwapChain&& other);
+	~AmrSwapChain();
 
 	AmrSwapChain(VkPhysicalDevice physicalDevice, VkDevice device, VkSurfaceKHR surface, uint32_t graphicsQueueFamilyIndex, uint32_t presentQueueFamilyIndex);
-
-	~AmrSwapChain();
 
 	std::vector<VkImageView> getImageViews();
 

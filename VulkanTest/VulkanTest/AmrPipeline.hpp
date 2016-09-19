@@ -8,11 +8,14 @@ class AmrPipeline
 	VkDevice m_device = VK_NULL_HANDLE;
 
 public:
+	AmrPipeline() = default;
 	AmrPipeline(const AmrPipeline&) = delete;
+	AmrPipeline(AmrPipeline&&) = delete;
+	AmrPipeline& operator=(const AmrPipeline&) = delete;
+	AmrPipeline& operator=(AmrPipeline&& other);
+	~AmrPipeline();
 
 	AmrPipeline(VkDevice device, VkExtent2D swapChainExtent, VkPipelineLayout pipelineLayout, VkRenderPass renderPass);
-
-	~AmrPipeline();
 
 	operator VkPipeline() const;
 

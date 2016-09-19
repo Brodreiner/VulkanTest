@@ -10,6 +10,16 @@ AmrImageView::AmrImageView(AmrImageView&& other)
 	other.m_imageView = VK_NULL_HANDLE;
 }
 
+AmrImageView& AmrImageView::operator=(AmrImageView&& other)
+{
+	if (m_imageView != VK_NULL_HANDLE)
+		vkDestroyImageView(m_device, m_imageView, nullptr);
+	m_device = other.m_device;
+	m_imageView = other.m_imageView;
+	other.m_imageView = VK_NULL_HANDLE;
+	return *this;
+}
+
 
 AmrImageView::AmrImageView(VkDevice device, VkImage image, VkFormat format, VkImageAspectFlags aspectFlags)
 	:m_device(device)

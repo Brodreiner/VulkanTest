@@ -8,8 +8,11 @@ class AmrCommandPool
 	VkDevice m_device = VK_NULL_HANDLE;
 
 public:
-
+	AmrCommandPool() {};
 	AmrCommandPool(const AmrCommandPool&) = delete;
+	AmrCommandPool(AmrCommandPool&&) = delete;
+	AmrCommandPool& operator=(const AmrCommandPool&) = delete;
+	AmrCommandPool& operator=(AmrCommandPool&& other);
 
 	AmrCommandPool(VkDevice device, uint32_t queueFalilyIndex);
 

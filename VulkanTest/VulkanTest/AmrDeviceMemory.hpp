@@ -10,7 +10,7 @@ class AmrDeviceMemory
 	uint32_t findMemoryType(VkPhysicalDevice physicalDevice, uint32_t typeFilter, VkMemoryPropertyFlags properties);
 
 public:
-	AmrDeviceMemory();
+	AmrDeviceMemory() {};
 	AmrDeviceMemory(const AmrDeviceMemory&) = delete;
 	AmrDeviceMemory(AmrDeviceMemory&&) = delete;
 	AmrDeviceMemory& operator=(const AmrDeviceMemory&) = delete;

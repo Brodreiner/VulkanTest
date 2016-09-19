@@ -1,6 +1,18 @@
 #pragma once
 
 #include "AmrCommandBuffer.hpp"
+#include <algorithm>
+
+AmrCommandBuffer& AmrCommandBuffer::operator=(AmrCommandBuffer&& other)
+{
+	if (m_commandBuffer != VK_NULL_HANDLE)
+		vkFreeCommandBuffers(m_device, m_commandPool, 1, &m_commandBuffer);
+	m_commandBuffer = other.m_commandBuffer;
+	m_commandPool = other.m_commandPool;
+	m_device = other.m_device;
+	other.m_commandBuffer = VK_NULL_HANDLE;
+	return *this;
+}
 
 AmrCommandBuffer::AmrCommandBuffer(VkDevice device, VkCommandPool commandPool, VkCommandBufferLevel commandBufferLevel)
 	:m_device(device)
@@ -16,7 +28,7 @@ AmrCommandBuffer::AmrCommandBuffer(VkDevice device, VkCommandPool commandPool, V
 
 AmrCommandBuffer::~AmrCommandBuffer()
 {
-	if(m_commandPool != VK_NULL_HANDLE)
+	if(m_commandBuffer != VK_NULL_HANDLE)
 		vkFreeCommandBuffers(m_device, m_commandPool, 1, &m_commandBuffer);
 }
 

@@ -8,7 +8,7 @@ class AmrBuffer
 	VkBuffer m_buffer = VK_NULL_HANDLE;
 
 public:
-	AmrBuffer();
+	AmrBuffer() {};
 	AmrBuffer(const AmrBuffer&) = delete;
 	AmrBuffer(AmrBuffer&&) = delete;
 	AmrBuffer& operator=(const AmrBuffer&) = delete;

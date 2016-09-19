@@ -17,6 +17,13 @@ class AmrValidationLayer
 	static bool isEveryLayerSupported();
 
 public:
+	AmrValidationLayer() = delete;
+	AmrValidationLayer(const AmrValidationLayer&) = delete;
+	AmrValidationLayer(AmrValidationLayer&&) = delete;
+	AmrValidationLayer& operator=(const AmrValidationLayer&) = delete;
+	AmrValidationLayer& operator=(AmrValidationLayer&& other) = delete;
+	~AmrValidationLayer() = delete;
+
 	/**
 	Check if all validation layers from a (hardcoded) list are supported and throw an exception if not.
 	If validation layers are disabled do nothing.

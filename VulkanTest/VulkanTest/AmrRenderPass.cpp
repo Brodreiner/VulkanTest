@@ -4,6 +4,16 @@
 #include <array>
 #include "AmrPhysicalDevice.hpp"
 
+AmrRenderPass& AmrRenderPass::operator=(AmrRenderPass&& other)
+{
+	if (m_renderPass != VK_NULL_HANDLE)
+		vkDestroyRenderPass(m_device, m_renderPass, nullptr);
+	m_device = other.m_device;
+	m_renderPass = other.m_renderPass;
+	other.m_renderPass = VK_NULL_HANDLE;
+	return *this;
+}
+
 void AmrRenderPass::createRenderPass(VkFormat swapChainImageFormat, const AmrPhysicalDevice& amrPhysicalDevice)
 {
 	VkFormat depthAttachmentFormat = amrPhysicalDevice.findSupportedFormat({ VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT }, VK_IMAGE_TILING_OPTIMAL, VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);

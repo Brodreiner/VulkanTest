@@ -5,6 +5,17 @@
 #include <array>
 #include <stdexcept>
 
+AmrDescriptorSetLayout& AmrDescriptorSetLayout::operator=(AmrDescriptorSetLayout&& other)
+{
+	if (m_descriptorSetLayout != VK_NULL_HANDLE)
+		vkDestroyDescriptorSetLayout(m_device, m_descriptorSetLayout, nullptr);
+	m_descriptorSetLayout = other.m_descriptorSetLayout;
+	m_device = other.m_device;
+	other.m_descriptorSetLayout = VK_NULL_HANDLE;
+	return *this;
+}
+
+
 AmrDescriptorSetLayout::AmrDescriptorSetLayout(VkDevice device)
 	:m_device(device)
 {

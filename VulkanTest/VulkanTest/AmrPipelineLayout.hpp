@@ -8,11 +8,14 @@ class AmrPipelineLayout
 	VkPipelineLayout m_pipelineLayout = VK_NULL_HANDLE;
 
 public:
+	AmrPipelineLayout() = default;
 	AmrPipelineLayout(const AmrPipelineLayout&) = delete;
+	AmrPipelineLayout(AmrPipelineLayout&&) = delete;
+	AmrPipelineLayout& operator=(const AmrPipelineLayout&) = delete;
+	AmrPipelineLayout& operator=(AmrPipelineLayout&& other);
+	~AmrPipelineLayout();
 
 	AmrPipelineLayout(VkDevice device, VkDescriptorSetLayout descriptorSetLayout);
-
-	~AmrPipelineLayout();
 
 	operator VkPipelineLayout() const;
 };

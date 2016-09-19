@@ -4,13 +4,13 @@
 #include <algorithm>
 #include <stdexcept>
 
-AmrBuffer::AmrBuffer()
-{
-}
 AmrBuffer& AmrBuffer::operator=(AmrBuffer&& other)
 {
-	std::swap(m_device, other.m_device);
-	std::swap(m_buffer, other.m_buffer);
+	if (m_buffer != VK_NULL_HANDLE)
+		vkDestroyBuffer(m_device, m_buffer, nullptr);
+	m_device = other.m_device;
+	m_buffer = other.m_buffer;
+	other.m_buffer = VK_NULL_HANDLE;
 	return *this;
 }
 

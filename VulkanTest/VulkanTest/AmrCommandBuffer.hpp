@@ -9,6 +9,12 @@ class AmrCommandBuffer
 	VkCommandBuffer m_commandBuffer = VK_NULL_HANDLE;
 
 public:
+	AmrCommandBuffer() {};
+	AmrCommandBuffer(const AmrCommandBuffer&) = delete;
+	AmrCommandBuffer(AmrCommandBuffer&&) = delete;
+	AmrCommandBuffer& operator=(const AmrCommandBuffer&) = delete;
+	AmrCommandBuffer& operator=(AmrCommandBuffer&& other);
+
 	AmrCommandBuffer(VkDevice device, VkCommandPool commandPool, VkCommandBufferLevel commandBufferLevel);
 
 	~AmrCommandBuffer();

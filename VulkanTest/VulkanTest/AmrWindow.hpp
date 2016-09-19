@@ -17,6 +17,13 @@ class AmrWindow
 	static void defaultResizeCallback(int width, int height);
 
 public:
+	AmrWindow() = default;
+	AmrWindow(const AmrWindow&) = delete;
+	AmrWindow(AmrWindow&&) = delete;
+	AmrWindow& operator=(const AmrWindow&) = delete;
+	AmrWindow& operator=(AmrWindow&& other) = default;
+	~AmrWindow() = default;
+
 	AmrWindow(uint32_t width, uint32_t height, const std::string& title);
 
 	void mainLoop();

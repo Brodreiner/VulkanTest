@@ -3,6 +3,16 @@
 #include "AmrPipelineLayout.hpp"
 #include <stdexcept>
 
+AmrPipelineLayout& AmrPipelineLayout::operator=(AmrPipelineLayout&& other)
+{
+	if (m_pipelineLayout != VK_NULL_HANDLE)
+		vkDestroyPipelineLayout(m_device, m_pipelineLayout, nullptr);
+	m_device = other.m_device;
+	m_pipelineLayout = other.m_pipelineLayout;
+	other.m_pipelineLayout = VK_NULL_HANDLE;
+	return *this;
+}
+
 AmrPipelineLayout::AmrPipelineLayout(VkDevice device, VkDescriptorSetLayout descriptorSetLayout)
 	:m_device(device)
 {

@@ -3,6 +3,15 @@
 #include "AmrSemaphore.hpp"
 #include <stdexcept>
 
+AmrSemaphore& AmrSemaphore::operator=(AmrSemaphore&& other)
+{
+	if (m_semaphore != VK_NULL_HANDLE)
+		vkDestroySemaphore(m_device, m_semaphore, nullptr);
+	m_device = other.m_device;
+	m_semaphore = other.m_semaphore;
+	return *this;
+}
+
 AmrSemaphore::AmrSemaphore(VkDevice device)
 	: m_device(device)
 {

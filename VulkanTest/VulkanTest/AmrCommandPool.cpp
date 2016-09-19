@@ -4,6 +4,17 @@
 #include "AmrCommandBuffer.hpp"
 #include <stdexcept>
 
+AmrCommandPool& AmrCommandPool::operator=(AmrCommandPool&& other)
+{
+	if (m_commandPool != VK_NULL_HANDLE)
+		vkDestroyCommandPool(m_device, m_commandPool, nullptr);
+	m_commandPool = other.m_commandPool;
+	m_device = other.m_device;
+	other.m_commandPool = VK_NULL_HANDLE;
+	return *this;
+}
+
+
 AmrCommandPool::AmrCommandPool(VkDevice device, uint32_t queueFalilyIndex)
 	: m_device(device)
 {

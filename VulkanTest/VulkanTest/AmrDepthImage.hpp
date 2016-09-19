@@ -16,6 +16,12 @@ class AmrDepthImage
 	AmrImageView m_amrDepthImageView;
 
 public:
+	AmrDepthImage() {};
+	AmrDepthImage(const AmrDepthImage&) = delete;
+	AmrDepthImage(AmrDepthImage&&) = delete;
+	AmrDepthImage& operator=(const AmrDepthImage&) = delete;
+	AmrDepthImage& operator=(AmrDepthImage&& other);
+
 	AmrDepthImage(const AmrPhysicalDevice& amrPhysicalDevice, VkQueue graphicsQueue, const AmrCommandPool& commandPool, VkDevice device, VkExtent2D extent);
 	
 	VkImageView getImageView() const;

@@ -13,16 +13,15 @@ class AmrImage
 	void createImage(const AmrPhysicalDevice& amrPhysicalDevice, VkExtent2D extent, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties);
 
 public:
-
-	AmrImage();
-
+	AmrImage() = default;
 	AmrImage(const AmrImage&) = delete;
+	AmrImage(AmrImage&&) = delete;
 	AmrImage& operator=(const AmrImage&) = delete;
 	AmrImage& operator=(AmrImage&& other);
+	~AmrImage();
 
 	AmrImage(const AmrPhysicalDevice& amrPhysicalDevice, VkDevice device, VkExtent2D extent, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties);
 
-	~AmrImage();
 
 	void writeData(const void* pixels, size_t imageSize);
 

@@ -3,6 +3,16 @@
 #include "AmrTextureSampler.hpp"
 #include <stdexcept>
 
+AmrTextureSampler& AmrTextureSampler::operator=(AmrTextureSampler&& other)
+{
+	if (m_sampler != VK_NULL_HANDLE)
+		vkDestroySampler(m_device, m_sampler, nullptr);
+	m_device = other.m_device;
+	m_sampler = other.m_sampler;
+	other.m_sampler = VK_NULL_HANDLE;
+	return *this;
+}
+
 AmrTextureSampler::AmrTextureSampler(VkDevice device)
 	:m_device(device)
 {
@@ -26,7 +36,7 @@ AmrTextureSampler::AmrTextureSampler(VkDevice device)
 
 AmrTextureSampler::~AmrTextureSampler()
 {
-	if (m_device != VK_NULL_HANDLE)
+	if (m_sampler != VK_NULL_HANDLE)
 		vkDestroySampler(m_device, m_sampler, nullptr);
 }
 

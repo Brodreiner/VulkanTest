@@ -9,8 +9,11 @@ class AmrFramebuffer
 	VkFramebuffer m_framebuffer = VK_NULL_HANDLE;
 
 public:
+	AmrFramebuffer() {};
 	AmrFramebuffer(const AmrFramebuffer&) = delete;
-	AmrFramebuffer(AmrFramebuffer&& other);
+	AmrFramebuffer(AmrFramebuffer&&);
+	AmrFramebuffer& operator=(const AmrFramebuffer&) = delete;
+	AmrFramebuffer& operator=(AmrFramebuffer&& other);
 
 	AmrFramebuffer(VkDevice device, VkRenderPass renderPass, const std::vector<VkImageView>& attachments, VkExtent2D extent);
 

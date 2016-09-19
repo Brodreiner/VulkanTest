@@ -14,10 +14,14 @@ class AmrSwapChainCommandBuffers
 
 
 public:
+	AmrSwapChainCommandBuffers() = default;
+	AmrSwapChainCommandBuffers(const AmrSwapChainCommandBuffers&) = delete;
+	AmrSwapChainCommandBuffers(AmrSwapChainCommandBuffers&&) = delete;
+	AmrSwapChainCommandBuffers& operator=(const AmrSwapChainCommandBuffers&) = delete;
+	AmrSwapChainCommandBuffers& operator=(AmrSwapChainCommandBuffers&& other);
+	~AmrSwapChainCommandBuffers();
 
 	AmrSwapChainCommandBuffers(VkDevice device, VkCommandPool commandPool, VkPipeline graphicsPipeline, VkBuffer vertexBuffer, VkBuffer indexBuffer, uint32_t indexCount, VkPipelineLayout pipelineLayout, VkDescriptorSet descriptorSet, const AmrFramebufferStack& amrFramebufferStack);
-
-	~AmrSwapChainCommandBuffers();
 
 	VkCommandBuffer& operator[](size_t i);
 };

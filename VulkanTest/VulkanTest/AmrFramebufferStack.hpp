@@ -12,6 +12,13 @@ class AmrFramebufferStack
 	VkExtent2D m_extent = {0, 0};
 
 public:
+	AmrFramebufferStack() = default;
+	AmrFramebufferStack(const AmrFramebufferStack&) = default;
+	AmrFramebufferStack(AmrFramebufferStack&&) = default;
+	AmrFramebufferStack& operator=(const AmrFramebufferStack&) = default;
+	AmrFramebufferStack& operator=(AmrFramebufferStack&& other) = default;
+	~AmrFramebufferStack() = default;
+
 	AmrFramebufferStack(VkDevice device, std::vector<VkImageView> swapChainImageViews, VkImageView depthImageView, VkRenderPass renderPass, VkExtent2D extent);
 
 	size_t size() const;

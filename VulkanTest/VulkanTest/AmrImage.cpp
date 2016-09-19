@@ -41,15 +41,17 @@ void AmrImage::createImage(const AmrPhysicalDevice& amrPhysicalDevice, VkExtent2
 	vkBindImageMemory(m_device, m_image, m_deviceMemory, 0);
 }
 
-AmrImage::AmrImage()
-{
-}
-
 AmrImage& AmrImage::operator=(AmrImage&& other)
 {
-	std::swap(m_image, other.m_image);
-	std::swap(m_deviceMemory, other.m_deviceMemory);
-	std::swap(m_device, other.m_device);
+	if (m_deviceMemory != VK_NULL_HANDLE)
+		vkFreeMemory(m_device, m_deviceMemory, nullptr);
+	if (m_image != VK_NULL_HANDLE)
+		vkDestroyImage(m_device, m_image, nullptr);
+	m_deviceMemory = other.m_deviceMemory;
+	m_image = other.m_image;
+	m_device = other.m_device;
+	other.m_deviceMemory = VK_NULL_HANDLE;
+	other.m_image = VK_NULL_HANDLE;
 	return *this;
 }
 

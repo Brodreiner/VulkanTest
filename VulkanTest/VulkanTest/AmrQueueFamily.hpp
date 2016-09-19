@@ -25,6 +25,13 @@ class AmrQueueFamily
 public:
 	static bool hasSufficientQueueFamilySupport(VkPhysicalDevice device, VkSurfaceKHR surface);
 
+	AmrQueueFamily() = default;
+	AmrQueueFamily(const AmrQueueFamily&) = default;
+	AmrQueueFamily(AmrQueueFamily&&) = default;
+	AmrQueueFamily& operator=(const AmrQueueFamily&) = default;
+	AmrQueueFamily& operator=(AmrQueueFamily&& other) = default;
+	~AmrQueueFamily() = default;
+
 	AmrQueueFamily(VkPhysicalDevice device, VkSurfaceKHR surface);
 
 	size_t getDeviceQueueCreateInfoSize() const;

@@ -16,13 +16,13 @@ uint32_t AmrDeviceMemory::findMemoryType(VkPhysicalDevice physicalDevice, uint32
 	throw std::runtime_error("failed to find suitable memory type!");
 }
 
-AmrDeviceMemory::AmrDeviceMemory()
-{
-}
 AmrDeviceMemory& AmrDeviceMemory::operator=(AmrDeviceMemory&& other)
 {
-	std::swap(m_device, other.m_device);
-	std::swap(m_deviceMemory, other.m_deviceMemory);
+	if (m_deviceMemory != VK_NULL_HANDLE)
+		vkFreeMemory(m_device, m_deviceMemory, nullptr);
+	m_deviceMemory = other.m_deviceMemory;
+	m_device = other.m_device;
+	other.m_deviceMemory = VK_NULL_HANDLE;
 	return *this;
 }
 

@@ -8,6 +8,23 @@ VKAPI_ATTR VkBool32 VKAPI_CALL AmrDebugCallback::debugCallback(VkDebugReportFlag
 	return VK_FALSE;
 }
 
+AmrDebugCallback& AmrDebugCallback::operator=(AmrDebugCallback&& other)
+{
+	if (m_instance != VK_NULL_HANDLE)
+	{
+		auto func = (PFN_vkDestroyDebugReportCallbackEXT)vkGetInstanceProcAddr(m_instance, "vkDestroyDebugReportCallbackEXT");
+		if (func != nullptr)
+		{
+			func(m_instance, m_callback, nullptr);
+		}
+	}
+	m_callback = other.m_callback;
+	m_instance = other.m_instance;
+	other.m_instance = VK_NULL_HANDLE;
+	return *this;
+}
+
+
 AmrDebugCallback::AmrDebugCallback(VkInstance instance)
 	:m_instance(instance)
 {

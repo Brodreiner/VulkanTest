@@ -6,6 +6,12 @@
 
 #include "AmrUniformBuffer.hpp"
 
+AmrDescriptorSet& AmrDescriptorSet::operator=(AmrDescriptorSet&& other)
+{
+	m_descriptorPool = other.m_descriptorPool;
+	m_descriptorSet = other.m_descriptorSet;
+	return *this;
+}
 
 AmrDescriptorSet::AmrDescriptorSet(VkDevice device, VkDescriptorSetLayout descriptorSetLayout, VkDescriptorPool descriptorPool, const AmrUniformBuffer& amrUniformBuffer, VkImageView textureImageView, VkSampler textureSampler)
 	: m_device(device)

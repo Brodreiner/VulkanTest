@@ -30,13 +30,22 @@ VKAPI_ATTR VkBool32 VKAPI_CALL AmrInstance::debugCallback(VkDebugReportFlagsEXT 
 	return VK_FALSE;
 }
 
-AmrInstance::AmrInstance()
+AmrInstance& AmrInstance::operator=(AmrInstance&& other)
+{
+	if (m_instance != VK_NULL_HANDLE)
+		vkDestroyInstance(m_instance, nullptr);
+	m_instance = other.m_instance;
+	other.m_instance = VK_NULL_HANDLE;
+	return *this;
+}
+
+AmrInstance::AmrInstance(const char* applicationName)
 {
 	AmrValidationLayer::checkLayerSupport();
 
 	VkApplicationInfo appInfo = {};
 	appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-	appInfo.pApplicationName = "";
+	appInfo.pApplicationName = applicationName;
 	appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
 	appInfo.pEngineName = "";
 	appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);

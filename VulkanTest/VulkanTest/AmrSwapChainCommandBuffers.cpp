@@ -5,6 +5,17 @@
 #include <array>
 #include "AmrFramebuffer.hpp"
 
+AmrSwapChainCommandBuffers& AmrSwapChainCommandBuffers::operator=(AmrSwapChainCommandBuffers&& other)
+{
+	if (m_commandBuffers.size() > 0)
+		vkFreeCommandBuffers(m_device, m_commandPool, static_cast<uint32_t>(m_commandBuffers.size()), m_commandBuffers.data());
+	m_commandBuffers = std::move(other.m_commandBuffers);
+	m_commandPool = other.m_commandPool;
+	m_device = other.m_device;
+	other.m_commandBuffers.clear();
+	return *this;
+}
+
 AmrSwapChainCommandBuffers::AmrSwapChainCommandBuffers(VkDevice device, VkCommandPool commandPool, VkPipeline graphicsPipeline, VkBuffer vertexBuffer, VkBuffer indexBuffer, uint32_t indexCount, VkPipelineLayout pipelineLayout, VkDescriptorSet descriptorSet, const AmrFramebufferStack& amrFramebufferStack)
 	: m_device(device)
 	, m_commandPool(commandPool)

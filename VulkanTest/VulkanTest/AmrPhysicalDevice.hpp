@@ -30,6 +30,13 @@ class AmrPhysicalDevice
 
 
 	public:
+		AmrPhysicalDevice() = default;
+		AmrPhysicalDevice(const AmrPhysicalDevice&) = default;
+		AmrPhysicalDevice(AmrPhysicalDevice&&) = default;
+		AmrPhysicalDevice& operator=(const AmrPhysicalDevice&) = default;
+		AmrPhysicalDevice& operator=(AmrPhysicalDevice&& other) = default;
+		~AmrPhysicalDevice() = default;
+
 		AmrPhysicalDevice(VkInstance instance, VkSurfaceKHR surface);
 
 		VkFormat findSupportedFormat(const std::vector<VkFormat>& candidates, VkImageTiling tiling, VkFormatFeatureFlags features) const;

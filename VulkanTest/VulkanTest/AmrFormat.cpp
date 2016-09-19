@@ -2,6 +2,12 @@
 
 #include "AmrFormat.hpp"
 
+AmrFormat& AmrFormat::operator=(AmrFormat&& other)
+{
+	m_format = other.m_format;
+	return *this;
+}
+
 AmrFormat::AmrFormat(VkPhysicalDevice physicalDevice, const std::vector<VkFormat>& candidates, VkImageTiling tiling, VkFormatFeatureFlags features)
 {
 	for (VkFormat format : candidates) {

@@ -14,6 +14,13 @@ class AmrUniformBuffer
 	VkDeviceSize m_size = 0;
 
 public:
+	AmrUniformBuffer() = default;
+	AmrUniformBuffer(const AmrUniformBuffer&) = default;
+	AmrUniformBuffer(AmrUniformBuffer&&) = default;
+	AmrUniformBuffer& operator=(const AmrUniformBuffer&) = default;
+	AmrUniformBuffer& operator=(AmrUniformBuffer&& other) = default;
+	~AmrUniformBuffer() = default;
+
 	AmrUniformBuffer(VkPhysicalDevice physicalDevice, VkDevice device, VkDeviceSize size);
 
 	VkBuffer getGpuBuffer() const;

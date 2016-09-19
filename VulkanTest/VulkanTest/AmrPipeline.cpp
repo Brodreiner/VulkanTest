@@ -6,6 +6,16 @@
 #include "AmrShader.hpp"
 #include "AmrVertex.hpp"
 
+AmrPipeline& AmrPipeline::operator=(AmrPipeline&& other)
+{
+	if (m_pipeline != VK_NULL_HANDLE)
+		vkDestroyPipeline(m_device, m_pipeline, nullptr);
+	m_device = other.m_device;
+	m_pipeline = other.m_pipeline;
+	other.m_pipeline = VK_NULL_HANDLE;
+	return *this;
+}
+
 AmrPipeline::AmrPipeline(VkDevice device, VkExtent2D swapChainExtent, VkPipelineLayout pipelineLayout, VkRenderPass renderPass)
 	:m_device(device)
 {

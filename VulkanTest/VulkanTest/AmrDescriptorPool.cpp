@@ -4,6 +4,16 @@
 
 #include <array>
 
+AmrDescriptorPool& AmrDescriptorPool::operator=(AmrDescriptorPool&& other)
+{
+	if (m_descriptorPool != VK_NULL_HANDLE)
+		vkDestroyDescriptorPool(m_device, m_descriptorPool, nullptr);
+	m_device = other.m_device;
+	m_descriptorPool = other.m_descriptorPool;
+	other.m_descriptorPool = VK_NULL_HANDLE;
+	return *this;
+}
+
 
 AmrDescriptorPool::AmrDescriptorPool(VkDevice device)
 	:m_device(device)

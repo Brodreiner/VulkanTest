@@ -3,6 +3,16 @@
 #include "AmrShader.hpp"
 #include <fstream>
 
+AmrShader& AmrShader::operator=(AmrShader&& other)
+{
+	if (m_shader != VK_NULL_HANDLE)
+		vkDestroyShaderModule(m_device, m_shader, nullptr);
+	m_device = other.m_device;
+	m_shader = other.m_shader;
+	other.m_shader = VK_NULL_HANDLE;
+	return *this;
+}
+
 std::vector<char> AmrShader::readFile(const std::string& filename)
 {
 	std::ifstream file(filename, std::ios::ate | std::ios::binary);

@@ -13,10 +13,15 @@ class AmrShader
 	void createShader(const std::vector<char>& code);
 
 public:
+	AmrShader() = default;
+	AmrShader(const AmrShader&) = delete;
+	AmrShader(AmrShader&&) = delete;
+	AmrShader& operator=(const AmrShader&) = delete;
+	AmrShader& operator=(AmrShader&& other);
+	~AmrShader();
 
 	AmrShader(VkDevice device, const std::string& filename);
 
-	~AmrShader();
 
 	operator VkShaderModule() const;
 

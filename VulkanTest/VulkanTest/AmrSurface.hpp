@@ -11,9 +11,14 @@ class AmrSurface
 	VkSurfaceKHR m_surface = VK_NULL_HANDLE;
 
 public:
-	AmrSurface(GLFWwindow* window, VkInstance instance);
-
+	AmrSurface() = default;
+	AmrSurface(const AmrSurface&) = delete;
+	AmrSurface(AmrSurface&&) = delete;
+	AmrSurface& operator=(const AmrSurface&) = delete;
+	AmrSurface& operator=(AmrSurface&& other);
 	~AmrSurface();
+
+	AmrSurface(GLFWwindow* window, VkInstance instance);
 
 	operator VkSurfaceKHR() const;
 

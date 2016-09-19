@@ -9,6 +9,16 @@ AmrFramebuffer::AmrFramebuffer(AmrFramebuffer&& other)
 	other.m_framebuffer = VK_NULL_HANDLE;
 }
 
+AmrFramebuffer& AmrFramebuffer::operator=(AmrFramebuffer&& other)
+{
+	if (m_framebuffer != VK_NULL_HANDLE)
+		vkDestroyFramebuffer(m_device, m_framebuffer, nullptr);
+	m_framebuffer = other.m_framebuffer;
+	m_device = other.m_device;
+	other.m_framebuffer = VK_NULL_HANDLE;
+	return *this;
+}
+
 AmrFramebuffer::AmrFramebuffer(VkDevice device, VkRenderPass renderPass, const std::vector<VkImageView>& attachments, VkExtent2D extent)
 	:m_device(device)
 {

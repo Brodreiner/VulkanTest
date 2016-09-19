@@ -144,6 +144,20 @@ void AmrSwapChain::createImageViews()
 	}
 }
 
+AmrSwapChain& AmrSwapChain::operator=(AmrSwapChain&& other)
+{
+	if (m_swapChain != VK_NULL_HANDLE)
+		vkDestroySwapchainKHR(m_device, m_swapChain, nullptr);
+	m_device = other.m_device;
+	m_imageViews = std::move(other.m_imageViews);
+	m_swapChain = other.m_swapChain;
+	m_swapChainExtent = other.m_swapChainExtent;
+	m_swapChainImageFormat = other.m_swapChainImageFormat;
+	m_swapChainImages = std::move(other.m_swapChainImages);
+	m_swapChain = VK_NULL_HANDLE;
+	return *this;
+}
+
 AmrSwapChain::AmrSwapChain(VkPhysicalDevice physicalDevice, VkDevice device, VkSurfaceKHR surface, uint32_t graphicsQueueFamilyIndex, uint32_t presentQueueFamilyIndex)
 	:m_device(device)
 {
