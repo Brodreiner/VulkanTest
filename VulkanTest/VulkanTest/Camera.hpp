@@ -15,8 +15,8 @@ class Camera
 	double m_mouseLastX;
 	double m_mouseLastY;
 
-	glm::vec3 m_position = { 0.0f, 0.0f, 2.0f };
-	glm::vec3 m_orientation = glm::normalize(glm::vec3{ 0.0f, 0.0f, -1.0f });
+	glm::vec3 m_position = { 0.0f, 2.0f, 4.0f };
+	glm::vec3 m_orientation = glm::normalize(glm::vec3{ 0.0f, -0.2f, -0.8f });
 	float m_moveSpeed = 1.f;
 	float m_mouseSpeed = 0.004f;
 
@@ -64,8 +64,13 @@ public:
 		{
 			float xdiff = (float)(xpos - m_mouseLastX);
 			float ydiff = (float)(ypos - m_mouseLastY);
+			// left, right
 			m_orientation = glm::rotate(m_orientation, -xdiff * m_mouseSpeed, glm::vec3{0, 1, 0});
-			m_orientation = glm::rotate(m_orientation, -ydiff * m_mouseSpeed, glm::cross(m_orientation, glm::vec3{ 0, 1, 0 }));
+			// up, down
+			auto newOrientation = glm::rotate(m_orientation, -ydiff * m_mouseSpeed, glm::cross(m_orientation, glm::vec3{ 0, 1, 0 }));
+			if (glm::length(newOrientation - m_orientation) < glm::length(newOrientation + glm::vec3{ 0, 1, 0 })) // prevent rollover bottom
+				if (glm::length(newOrientation - m_orientation) < glm::length(newOrientation - glm::vec3{ 0, 1, 0 })) // prevent rollover top
+					m_orientation = newOrientation;
 		}
 		m_mouseLastX = xpos;
 		m_mouseLastY = ypos;
