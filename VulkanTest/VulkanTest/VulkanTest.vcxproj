@@ -231,6 +231,8 @@
     <ClInclude Include="AmrVertex.hpp" />
     <ClInclude Include="AmrVertexBuffer.hpp" />
     <ClInclude Include="AmrWindow.hpp" />
+    <ClInclude Include="Camera.hpp" />
+    <ClInclude Include="GameTime.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -8,6 +8,7 @@
 #include <glm/vec4.hpp>
 #include <glm/mat4x4.hpp>
 #include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <GLFW/glfw3.h>
@@ -22,22 +23,31 @@ struct UniformBufferObject {
 };
 
 std::vector<AmrVertex> vertices = {
-	{ { -0.5f, -0.5f, 0.0f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 0.0f } },
-	{ { 0.5f, -0.5f, 0.0f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 0.0f } },
-	{ { 0.5f, 0.5f, 0.0f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 1.0f } },
-	{ { -0.5f, 0.5f, 0.0f },{ 1.0f, 1.0f, 1.0f },{ 0.0f, 1.0f } },
+	{ { -0.5f, -0.5f, 0.0f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 1.0f } },
+	{ { 0.5f, -0.5f, 0.0f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 1.0f } },
+	{ { 0.5f, 0.5f, 0.0f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 0.0f } },
+	{ { -0.5f, 0.5f, 0.0f },{ 1.0f, 1.0f, 1.0f },{ 0.0f, 0.0f } },
 
-	{ { -0.5f, -0.5f, -0.5f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 0.0f } },
-	{ { 0.5f, -0.5f, -0.5f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 0.0f } },
-	{ { 0.5f, 0.5f, -0.5f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 1.0f } },
-	{ { -0.5f, 0.5f, -0.5f },{ 1.0f, 1.0f, 1.0f },{ 0.0f, 1.0f } }
+	{ { -0.5f, -0.5f, -0.5f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 1.0f } },
+	{ { 0.5f, -0.5f, -0.5f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 1.0f } },
+	{ { 0.5f, 0.5f, -0.5f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 0.0f } },
+	{ { -0.5f, 0.5f, -0.5f },{ 1.0f, 1.0f, 1.0f },{ 0.0f, 0.0f } }
 };
 
 std::vector<uint32_t> indices = {
 	0, 1, 2, 2, 3, 0,
-	4, 5, 6, 6, 7, 4
+	4, 5, 6, 6, 7, 4,
+
+
 };
 
+void AmrEngine::doPhysics()
+{
+	float timeDelta = m_gameTime.getTimeSinceLastCall();
+	m_camera.move(timeDelta);
+	updateUniformBuffer(timeDelta);
+
+}
 
 AmrEngine::AmrEngine(uint32_t width, uint32_t height, const std::string& title)
 {
@@ -67,7 +77,7 @@ AmrEngine::AmrEngine(uint32_t width, uint32_t height, const std::string& title)
 	recreateSwapChain();
 
 	m_amrWindow.setEventLoopCallback([&]() {
-		updateUniformBuffer();
+		doPhysics();
 		drawFrame();
 	});
 
@@ -81,21 +91,42 @@ AmrEngine::AmrEngine(uint32_t width, uint32_t height, const std::string& title)
 			std::cout << "E has been pressed!" << std::endl;
 		if (key == GLFW_KEY_E && action == GLFW_RELEASE)
 			std::cout << "E has been released!" << std::endl;
+		switch (key)
+		{
+		case GLFW_KEY_S:
+			m_camera.moveBack(action != GLFW_RELEASE);
+			break;
+		case GLFW_KEY_W:
+			m_camera.moveForward(action != GLFW_RELEASE);
+			break;
+		case GLFW_KEY_A:
+			m_camera.moveLeft(action != GLFW_RELEASE);
+			break;
+		case GLFW_KEY_D:
+			m_camera.moveRight(action != GLFW_RELEASE);
+			break;
+		}
 	});
 
 	m_amrWindow.setMouseMoveCallback([&](double xpos, double ypos)
 	{
 		std::cout << "Mouse position: " << xpos << " x " << ypos << std::endl;
+		m_camera.mouseLook(xpos, ypos);
 	});
 
 	m_amrWindow.setMouseClickCallback([&](int button, int action, int mods)
 	{
 		if (button == GLFW_MOUSE_BUTTON_LEFT)
 		{
-			if(action == GLFW_PRESS)
+			if (action == GLFW_PRESS) {
+				m_camera.enableMouseLook();
 				m_amrWindow.disableCursor();
+			}
 			if (action == GLFW_RELEASE)
+			{
+				m_camera.disableMouseLook();
 				m_amrWindow.enableCursor();
+			}
 		}
 		std::cout << "Mouse click: button=" << button << " action=" << action << " mods=" << mods << std::endl;
 	});
@@ -105,16 +136,18 @@ AmrEngine::AmrEngine(uint32_t width, uint32_t height, const std::string& title)
 	std::cout << "Graphics Queue is idle now!" << std::endl;
 }
 
-void AmrEngine::updateUniformBuffer()
+void AmrEngine::updateUniformBuffer(float timeDelta)
 {
-	static auto startTime = std::chrono::high_resolution_clock::now();
-
-	auto currentTime = std::chrono::high_resolution_clock::now();
-	float time = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime).count() / 1000.0f;
 
 	UniformBufferObject ubo = {};
-	ubo.model = glm::rotate(glm::mat4(), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-	ubo.view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+	//ubo.model = glm::rotate(glm::mat4(), 0 * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+
+	glm::vec3 position = m_camera.getPosition();
+	glm::vec3 orientation = m_camera.getOrientation();
+
+	ubo.model = glm::mat4(1.0f); //glm::translate(position);
+
+	ubo.view = glm::lookAt(position, position + orientation, glm::vec3(0.0f, 1.0f, 0.0f));
 	ubo.proj = glm::perspective(glm::radians(45.0f), m_amrSwapChain.getExtent().width / (float)m_amrSwapChain.getExtent().height, 0.1f, 10.0f);
 	ubo.proj[1][1] *= -1;
 

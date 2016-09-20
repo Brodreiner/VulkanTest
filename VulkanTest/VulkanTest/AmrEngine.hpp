@@ -36,6 +36,9 @@
 #include "AmrSwapChainCommandBuffers.hpp"
 #include "AmrSemaphore.hpp"
 
+#include "GameTime.hpp"
+#include "Camera.hpp"
+
 class AmrEngine
 {
 	AmrWindow m_amrWindow;
@@ -67,10 +70,14 @@ class AmrEngine
 	AmrSemaphore m_amrImageAvailableSemaphore;
 	AmrSemaphore m_amrRenderFinishedSemaphore;
 
+	GameTime m_gameTime;
+	Camera m_camera;
+
+	void doPhysics();
 public:
 	AmrEngine(uint32_t width, uint32_t height, const std::string& title);
 
-	void updateUniformBuffer();
+	void updateUniformBuffer(float timeDelta);
 
 	void recreateSwapChain();
 
