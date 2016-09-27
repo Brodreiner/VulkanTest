@@ -38,6 +38,9 @@
 
 #include "GameTime.hpp"
 #include "Camera.hpp"
+#include "Block.hpp"
+#include "Chunk.hpp"
+#include "FpsCounter.hpp"
 
 class AmrEngine
 {
@@ -72,6 +75,7 @@ class AmrEngine
 
 	GameTime m_gameTime;
 	Camera m_camera;
+	FpsCounter m_fpsCounter;
 
 	void doPhysics();
 public:

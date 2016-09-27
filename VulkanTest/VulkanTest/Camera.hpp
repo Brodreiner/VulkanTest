@@ -15,9 +15,9 @@ class Camera
 	double m_mouseLastX;
 	double m_mouseLastY;
 
-	glm::vec3 m_position = { 0.0f, 2.0f, 4.0f };
-	glm::vec3 m_orientation = glm::normalize(glm::vec3{ 0.0f, -0.2f, -0.8f });
-	float m_moveSpeed = 1.f;
+	glm::vec3 m_position = { 128.f, 150.f, 320.0f };
+	glm::vec3 m_orientation = glm::normalize(glm::vec3{ 0.0f, -0.4f, -0.8f });
+	float m_moveSpeed = 30.f;
 	float m_mouseSpeed = 0.004f;
 
 public:
@@ -83,9 +83,9 @@ public:
 		if (m_moveForward)
 			m_position += timeStep * m_moveSpeed * m_orientation;
 		if (m_moveLeft)
-			m_position -= timeStep * m_moveSpeed * glm::cross(m_orientation, { 0, 1, 0 });
+			m_position -= timeStep * m_moveSpeed * glm::normalize(glm::cross(m_orientation, { 0, 1, 0 }));
 		if (m_moveRight)
-			m_position += timeStep * m_moveSpeed * glm::cross(m_orientation, { 0, 1, 0 });
+			m_position += timeStep * m_moveSpeed * glm::normalize(glm::cross(m_orientation, { 0, 1, 0 }));
 	}
 
 };

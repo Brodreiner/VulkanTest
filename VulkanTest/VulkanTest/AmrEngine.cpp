@@ -23,23 +23,65 @@ struct UniformBufferObject {
 };
 
 std::vector<AmrVertex> vertices = {
-	// top
-	{ { 0.f, 1.f, 0.f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 0.0f } },
-	{ { 0.f, 1.f, 1.f },{ 0.0f, 1.0f, 0.0f },{ 0.0f, 1.0f } },
-	{ { 1.f, 1.f, 1.f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 1.0f } },
-	{ { 1.f, 1.f, 0.f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 0.0f } },
+	//// top
+	//{ { 0.f, 1.f, 0.f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 0.0f } },
+	//{ { 0.f, 1.f, 1.f },{ 0.0f, 1.0f, 0.0f },{ 0.0f, 1.0f } },
+	//{ { 1.f, 1.f, 1.f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 1.0f } },
+	//{ { 1.f, 1.f, 0.f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 0.0f } },
 	//// bottom
-	{ { 0.f, 0.f, 0.f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 0.0f } },
-	{ { 1.f, 0.f, 0.f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 0.0f } },
-	{ { 1.f, 0.f, 1.f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 1.0f } },
-	{ { 0.f, 0.f, 1.f },{ 0.0f, 1.0f, 0.0f },{ 0.0f, 1.0f } },
+	//{ { 0.f, 0.f, 0.f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 0.0f } },
+	//{ { 1.f, 0.f, 0.f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 0.0f } },
+	//{ { 1.f, 0.f, 1.f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 1.0f } },
+	//{ { 0.f, 0.f, 1.f },{ 0.0f, 1.0f, 0.0f },{ 0.0f, 1.0f } },
+	//// front
+	//{ { 0.f, 1.f, 1.f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 0.0f } },
+	//{ { 0.f, 0.f, 1.f },{ 0.0f, 1.0f, 0.0f },{ 0.0f, 1.0f } },
+	//{ { 1.f, 0.f, 1.f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 1.0f } },
+	//{ { 1.f, 1.f, 1.f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 0.0f } },
+	//// back
+	//{ { 1.f, 1.f, 0.f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 0.0f } },
+	//{ { 1.f, 0.f, 0.f },{ 0.0f, 1.0f, 0.0f },{ 0.0f, 1.0f } },
+	//{ { 0.f, 0.f, 0.f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 1.0f } },
+	//{ { 0.f, 1.f, 0.f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 0.0f } },
+	//// left
+	//{ { 0.f, 1.f, 0.f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 0.0f } },
+	//{ { 0.f, 0.f, 0.f },{ 0.0f, 1.0f, 0.0f },{ 0.0f, 1.0f } },
+	//{ { 0.f, 0.f, 1.f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 1.0f } },
+	//{ { 0.f, 1.f, 1.f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 0.0f } },
+	//// right
+	//{ { 1.f, 1.f, 1.f },{ 1.0f, 0.0f, 0.0f },{ 0.0f, 0.0f } },
+	//{ { 1.f, 0.f, 1.f },{ 0.0f, 1.0f, 0.0f },{ 0.0f, 1.0f } },
+	//{ { 1.f, 0.f, 0.f },{ 0.0f, 0.0f, 1.0f },{ 1.0f, 1.0f } },
+	//{ { 1.f, 1.f, 0.f },{ 0.0f, 1.0f, 0.0f },{ 1.0f, 0.0f } },
 };
 
 std::vector<uint32_t> indices = {
-	0, 1, 2, 2, 3, 0, // top
-	4, 5, 6, 6, 7, 4, // bottom
+	//0, 1, 2, 2, 3, 0, // top
+	//4, 5, 6, 6, 7, 4, // bottom
+	//8, 9, 10, 10, 11, 8, // front
+	//12, 13, 14, 14, 15, 12, // back
+	//16, 17, 18, 18, 19, 16, // left
+	//20, 21, 22, 22, 23, 20, // right
 };
 
+
+void fillVertexIndexBuffer()
+{
+	auto chunk = new Chunk;
+	chunk->draw(vertices, indices);
+	delete chunk;
+	//Block block;
+	//for (int x = 0; x < 100; ++x)
+	//{
+	//	for (int y = 0; y < 100; ++y)
+	//	{
+	//		for (int z = 0; z < 100; ++z)
+	//		{
+	//			block.drawAllFaces(vertices, indices, glm::vec3{ x,y,z });
+	//		}
+	//	}
+	//}
+}
 
 void AmrEngine::doPhysics()
 {
@@ -51,6 +93,8 @@ void AmrEngine::doPhysics()
 
 AmrEngine::AmrEngine(uint32_t width, uint32_t height, const std::string& title)
 {
+	fillVertexIndexBuffer();
+
 	m_amrWindow = AmrWindow(width, height, title);
 	m_amrInstance = AmrInstance("Vulkan Test");
 	m_amrDebugCallback = AmrDebugCallback(m_amrInstance);
@@ -62,7 +106,7 @@ AmrEngine::AmrEngine(uint32_t width, uint32_t height, const std::string& title)
 	m_amrPresentQueue = AmrQueue(m_amrDevice, m_amrQueueFamily.getPresentQueueFamilyIndex(), 0);
 	m_amrCommandPool = AmrCommandPool(m_amrDevice, m_amrQueueFamily.getGraphicsQueueFamilyIndex());
 
-	m_amrTextureImage = AmrTextureImage(m_amrPhysicalDevice, m_amrDevice, m_amrCommandPool, m_amrGraphicsQueue, "textures/texture.jpg");
+	m_amrTextureImage = AmrTextureImage(m_amrPhysicalDevice, m_amrDevice, m_amrCommandPool, m_amrGraphicsQueue, "textures/dirt.png");
 	m_amrTextureImageView = AmrImageView(m_amrDevice, m_amrTextureImage, VK_FORMAT_R8G8B8A8_UNORM, VK_IMAGE_ASPECT_COLOR_BIT);
 	m_amrTextureSampler = AmrTextureSampler(m_amrDevice);
 	m_amrVertexBuffer = AmrVertexBuffer(m_amrPhysicalDevice, m_amrDevice, m_amrGraphicsQueue, m_amrCommandPool, &(vertices[0]), sizeof(vertices[0]) * vertices.size());
@@ -79,6 +123,7 @@ AmrEngine::AmrEngine(uint32_t width, uint32_t height, const std::string& title)
 	m_amrWindow.setEventLoopCallback([&]() {
 		doPhysics();
 		drawFrame();
+		m_fpsCounter.autoPrint();
 	});
 
 	m_amrWindow.setResizeCallback([&](int width, int height) {
@@ -138,17 +183,19 @@ AmrEngine::AmrEngine(uint32_t width, uint32_t height, const std::string& title)
 
 void AmrEngine::updateUniformBuffer(float timeDelta)
 {
-
+	static float time = 0;
+	time += timeDelta;
 	UniformBufferObject ubo = {};
-	//ubo.model = glm::rotate(glm::mat4(), 0 * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+
+	//ubo.model *= glm::rotate(glm::mat4(), time * glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	//ubo.model *= glm::translate(glm::vec3(-0.5f, -0.5f, -0.5f));
 
 	glm::vec3 position = m_camera.getPosition();
 	glm::vec3 orientation = m_camera.getOrientation();
 
-	ubo.model = glm::mat4(1.0f); //glm::translate(position);
 
 	ubo.view = glm::lookAt(position, position + orientation, glm::vec3(0.0f, 1.0f, 0.0f));
-	ubo.proj = glm::perspective(glm::radians(45.0f), m_amrSwapChain.getExtent().width / (float)m_amrSwapChain.getExtent().height, 0.1f, 10.0f);
+	ubo.proj = glm::perspective(glm::radians(45.0f), m_amrSwapChain.getExtent().width / (float)m_amrSwapChain.getExtent().height, 0.1f, 20000.0f);
 	ubo.proj[1][1] *= -1;
 
 	m_amrUniformBuffer.getStagingMemory().writeData(&ubo, sizeof(ubo));
